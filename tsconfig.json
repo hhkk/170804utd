@@ -1,0 +1,24 @@
+ Volume in drive C is Acer
+ Volume Serial Number is 362A-2207
+
+ Directory of C:\utd\170804utd
+
+08/04/2017  03:40 PM    <DIR>          .
+08/04/2017  03:40 PM    <DIR>          ..
+08/04/2017  03:40 PM               486 .bithoundrc
+08/04/2017  03:40 PM                53 .gitignore
+08/04/2017  03:40 PM    <DIR>          .meteor
+08/04/2017  03:40 PM               566 170228SocZipf.iml
+08/04/2017  03:40 PM    <DIR>          both
+08/04/2017  03:40 PM    <DIR>          client
+08/04/2017  03:40 PM               372 fonts.json
+08/04/2017  03:40 PM    <DIR>          manuals
+08/04/2017  03:40 PM             1,538 package.json
+08/04/2017  03:40 PM             1,951 README.md
+08/04/2017  03:40 PM    <DIR>          server
+08/04/2017  03:40 PM                 0 t.txt
+08/04/2017  03:42 PM                 0 tsconfig.json
+08/04/2017  03:40 PM    <DIR>          typings
+08/04/2017  03:40 PM             1,130 typings.d.ts
+               9 File(s)          6,096 bytes
+               8 Dir(s)   6,040,121,344 bytes free

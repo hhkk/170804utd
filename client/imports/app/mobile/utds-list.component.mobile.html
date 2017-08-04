@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Socially</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-card *ngFor="let utd of utds | async">
+    <img *ngIf="utd.images" [src]="utd | displayMainImage">
+    <ion-card-content>
+      <ion-card-title>
+        {{utd.name}}xyz
+      </ion-card-title>
+      <p>
+        {{utd.description}}
+      </p>
+    </ion-card-content>
+
+    <ion-row no-padding>
+      <ion-col text-right>
+        <ion-badge>
+          yes {{utd | rsvp:'yes'}}
+        </ion-badge>
+        <ion-badge item-center dark>
+          maybe {{utd | rsvp:'maybe'}}
+        </ion-badge>
+        <ion-badge item-center danger>
+          no {{utd | rsvp:'no'}}
+        </ion-badge>
+      </ion-col>
+    </ion-row>
+  </ion-card>
+</ion-content>

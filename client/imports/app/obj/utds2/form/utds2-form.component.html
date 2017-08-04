@@ -1,0 +1,26 @@
+<div class="form-container">
+    <div class="container-background">
+        <div class="form-content">
+            <div class="form-center">
+                <form *ngIf="user" [formGroup]="addForm" (ngSubmit)="addUtd();">
+                    <div style="display: table-row">
+                        <div class="form-inputs">
+                            <!--hiMom2!!!!!  \obj\utds2\utds2-form.component.html-->
+                            <button color="accent" md-raised-button type="submit">UTD2!</button>
+                            <md-input dividerColor="accent" formControlName="name" placeholder="note"></md-input>
+                            |
+                                <md-input dividerColor="accent" formControlName="description" placeholder="Description"></md-input>
+                                |
+                                <md-input dividerColor="accent" formControlName="location" placeholder="Location name"></md-input>
+                                |
+                            <md-checkbox formControlName="public">Public </md-checkbox>
+                        </div>
+                    </div>
+                </form>
+                <div *ngIf="!user">
+                    Please login in order to create new utds!
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

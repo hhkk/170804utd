@@ -1,0 +1,41 @@
+<div class="utd-details-container" *ngIf="utd">
+  <div class="row">
+    <div class="utd-details">
+      <md-card>
+        <h2>{{ utd.name }}</h2>
+        <form layout="column" (submit)="saveUtd()">
+          <label>Utd Name: </label>
+          <md-input [disabled]="!isOwner" [(ngModel)]="utd.name" name="name"></md-input>
+          <br />
+          <label>Utd Description: </label>
+          <md-input [disabled]="!isOwner" [(ngModel)]="utd.description" name="description"></md-input>
+          <br />
+          <label>Location name: </label>
+          <md-input [disabled]="!isOwner" [(ngModel)]="utd.location.name" name="location"></md-input>
+          <br />
+          <md-checkbox [disabled]="!isOwner" [(checked)]="utd.public" name="public" aria-label="Public">
+            Public utd?
+          </md-checkbox>
+xx
+          <div layout="row" layout-align="left">
+            <button [disabled]="!isOwner" type="submit" md-raised-button color="accent">Save</button>
+            <a [routerLink]="['/']" md-raised-button class="md-raised">Back</a>
+          </div>
+            yy
+        </form>
+      </md-card>
+    </div>
+    <div class="utd-invites">
+      <md-card>
+          <h2>Invitations</h2>
+          <span [hidden]="!utd.public">Public utd, no need for invitations!</span>
+          <md-list>
+              <md-list-item *ngFor="let user of users | async">
+                  <div>{{ user | displayName }}</div>
+                  <button (click)="inviteUtd(user)" md-raised-button>InviteUtd</button>
+              </md-list-item>
+          </md-list>
+      </md-card>
+    </div>
+  </div>
+</div>

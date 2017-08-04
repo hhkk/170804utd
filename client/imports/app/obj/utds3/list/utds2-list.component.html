@@ -1,0 +1,52 @@
+<utds-formx263></utds-formx263>
+
+<div class="utds-list-container">
+    <div class="utds3-listxxx">
+        <div >
+            <!--utds3B hbk obj\utds3\utds3-list.component.html-->
+            utds"3"-list.component.html line 7 utds3-listxxx
+            <form>
+                By Location: <md-input dividerColor="primary" type="text" #searchtext placeholder="Enter Location"></md-input>
+                <button md-button (click)="search(searchtext.value)">Filter</button>
+
+                Sort by Name:
+                <select class="form-control" #sort (change)="changeSortOrder(sort.value)">
+                    <option value="1" selected>Ascending</option>
+                    <option value="-1">Descending</option>
+                </select>
+            </form>
+        </div>
+
+        <pagination-controls class="pagination" (pageChange)="onPageChanged($event)"></pagination-controls>
+
+        <div *ngFor="let utd of utdsxx2 | async" class="utd-card">
+
+            <img *ngIf="utd.images && utd.images.length > 0" class="utd-main-image" [src]="utd | displayMainImage">
+
+            <a [routerLink]="['/utd3', utd._id]">{{utd.name}}</a>
+            , where: {{utd.location.name}}
+            , desc: {{utd.description}}
+
+            <button class="remove-utd" md-icon-button *ngIf="isOwner(utd)" (click)="removeUtd(utd)">
+                <md-icon class="md-24">X</md-icon>
+            </button>
+
+            <div class="rsvp-container">
+                <div class="rsvps-sum">
+                    <div class="rsvps-amount">{{utd | rsvp:'yes'}}</div>
+                    <div class="rsvps-title">Yes</div>
+                </div>
+                <div class="rsvps-sum">
+                    <div class="rsvps-amount">{{utd | rsvp:'maybe'}}</div>
+                    <div class="rsvps-title">Maybe</div>
+                </div>
+                <div class="rsvps-sum">
+                    <div class="rsvps-amount">{{utd | rsvp:'no'}}</div>
+                    <div class="rsvps-title">No</div>
+                </div>
+            </div>
+        </div>
+
+        <pagination-controls class="pagination" (pageChange)="onPageChanged($event)"></pagination-controls>
+    </div>
+</div>

@@ -1,0 +1,20 @@
+<!--<md-toolbar color="primary">-->
+<!--<md-toolbar class="md-tall md-accent">-->
+<!--<md-toolbar class="md-short md-hue-1 ">-->
+    <md-toolbar color="primary" style="min-height:10px">
+
+    <a routerLink="/" class="toolbar-title">Home</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+    <a routerLink="/ustodo" class="toolbar-title">UsToDo</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+    <a routerLink="/ustodo3" class="toolbar-title">Utd3</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+    <a routerLink="/parties" class="toolbar-title">Parties</a>
+    <span class="fill-remaining-space"></span>
+    <div [hidden]="user">
+        <a md-button [routerLink]="['/login']" >hbkLogin0</a>
+        <a md-button [routerLink]="['/signup']">hbkSign up0</a>
+    </div>
+    <div [hidden]="!user">
+        <span>{{ user | displayName }}</span>
+        <button md-button (click)="logout()">Logout</button>
+    </div>
+</md-toolbar>
+<router-outlet></router-outlet>
