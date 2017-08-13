@@ -14,13 +14,13 @@ import { Utd3 } from '../../../../../../both/models/utd3.model';
 import { Users } from '../../../../../../both/collections/users.collection';
 import { User } from '../../../../../../both/models/user.model';
 
-import template from './utd2-details.component.html';
-import style from './utd2-details.component.scss';
+import template from './utd3-details.component.html';
+import style from './utd3-details.component.scss';
 
-console.log ('in client utds3/utd2-details.component.ts');
+console.log ('in client utds3-details.component.ts');
 
 @Component({
-  selector: 'utd-details',
+  selector: 'utd-detailsxxcomponentselector',
   template,
   styles: [ style ]
 })
@@ -51,7 +51,7 @@ export class Utd3DetailsComponent implements OnInit, OnDestroy {
           this.utdSub.unsubscribe();
         }
 
-        this.utdSub = MeteorObservable.subscribe('utd3pub', this.utdId).subscribe(() => {
+          this.utdSub = MeteorObservable.subscribe('indivUtdhbkpubname', this.utdId).subscribe(() => {
           console.log('in subscribe utd3pub');
           MeteorObservable.autorun().subscribe(() => {
             this.utd = Utds3.findOne(this.utdId);

@@ -3,7 +3,7 @@ import { Meteor } from 'meteor/meteor';
 
 import { Utd3 }  from '../models/utd3.model';
 
-export const Utds3 = new MongoObservable.Collection<Utd3>('utds3a');
+export const Utds3 = new MongoObservable.Collection<Utd3>('utds3ahbkpubname');
 console.log ('in utds3.collection.ts');
 
 function loggedIn() {

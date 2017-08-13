@@ -6,8 +6,8 @@ import { UtilLog } from '../../../../../../both/utlities/UtilLog';
 import { UtdEnum } from '../../../../../../both/utlities/UtdEnum';
 
 import { InjectUser } from "angular2-meteor-accounts-ui";
-import template from './utds2-form.component.html';
-import style from './utds2-form.component.scss';
+import template from './utds3-form.component.html';
+import style from './utds3-form.component.scss';
 
 @Component({
   selector: 'utds-formx263',

@@ -1,5 +1,5 @@
 /* eslint-env mocha */
-
+console.log ('kjkkhkhh');
 import { Meteor } from 'meteor/meteor';
 
 let s = 'C.test hbk161018testTest.test.ts';

@@ -9,8 +9,8 @@ import { MouseEvent } from "angular2-google-maps/core";
 
 import 'rxjs/add/operator/map';
 
-import { Utds2 } from '../../../../../../both/collections/utds2.collection';
-import { Utd2 } from '../../../../../../both/models/utd2.model';
+import { Utds3 } from '../../../../../../both/collections/utds3.collection';
+import { Utd3 } from '../../../../../../both/models/utd3.model';
 import { Users } from '../../../../../../both/collections/users.collection';
 import { User } from '../../../../../../both/models/user.model';
 
@@ -28,7 +28,7 @@ console.log ('in client utd2-details.component.ts');
 export class Utd2DetailsComponent implements OnInit, OnDestroy {
   utdId: string;
   paramsSub: Subscription;
-  utd: Utd2;
+  utd: Utd3;
   utdSub: Subscription;
   users: Observable<User>;
   uninvitedSub: Subscription;
@@ -54,7 +54,7 @@ export class Utd2DetailsComponent implements OnInit, OnDestroy {
         this.utdSub = MeteorObservable.subscribe('utd2pub', this.utdId).subscribe(() => {
           console.log('in subscribe utd2pub');
           MeteorObservable.autorun().subscribe(() => {
-            this.utd = Utds2.findOne(this.utdId);
+            this.utd = Utds3.findOne(this.utdId);
             this.getUsers(this.utd);
           });
         });
@@ -69,7 +69,7 @@ export class Utd2DetailsComponent implements OnInit, OnDestroy {
       });
   }
 
-  getUsers(utd: Utd2) {
+  getUsers(utd: Utd3) {
     if (utd) {
       this.users = Users.find({
         _id: {
@@ -86,7 +86,7 @@ export class Utd2DetailsComponent implements OnInit, OnDestroy {
       return;
     }
     
-    Utds2.update(this.utd._id, {
+    Utds3.update(this.utd._id, {
       $set: {
         name: this.utd.name,
         description: this.utd.description,
