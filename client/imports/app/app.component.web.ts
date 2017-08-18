@@ -5,7 +5,7 @@ import template from './app.component.web.html';
 import {InjectUser} from "angular2-meteor-accounts-ui";
 
 @Component({
-  selector: 'app',
+  selector: 'app234',
   template,
   styles: [ style ]
 })

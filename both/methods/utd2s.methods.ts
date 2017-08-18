@@ -11,7 +11,7 @@ function getContactEmail(user:Meteor.User):string {
 }
 
 Meteor.methods({
-  inviteUtdMethod: function (utdId:string, userId:string) {
+  inviteUtdMethodhbkhbk: function (utdId:string, userId:string) {
 
     let s = '***************   in utd2s.methods.ts ' + (Meteor.isServer ? 'server' : 'client');
     check(utdId, String);

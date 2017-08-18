@@ -1,0 +1,36 @@
+<utds-formx2634></utds-formx2634>
+
+<div class="utds-list-container">
+    <div class="utds4-listxxx">
+        <div >
+            <!--utds4B hbk obj\utds4\utds4-list.component.html-->
+            utds"4"-list.component.html line 7 utds4-listxxx
+            <form>
+                By Location: <md-input dividerColor="primary" type="text" #searchtext placeholder="Enter Location"></md-input>
+                <button md-button (click)="search(searchtext.value)">FilterUtd4!</button>
+
+                Sort by Name:
+                <select class="form-control" #sort (change)="changeSortOrder(sort.value)">
+                    <option value="1" selected>Ascending</option>
+                    <option value="-1">Descending</option>
+                </select>
+            </form>
+        </div>
+
+        <pagination-controls class="pagination" (pageChange)="onPageChanged($event)"></pagination-controls>
+
+        <div *ngFor="let utd of utdsxx2 | async" class="utd-card">
+top---------------------------------------<br>
+            <img *ngIf="utd.images && utd.images.length > 0" class="utd-main-image" [src]="utd | displayMainImage">
+
+            <a [routerLink]="['/utd4', utd._id]">{{utd.utdstr}}</a>
+
+            <button class="remove-utd" md-icon-button *ngIf="isOwner(utd)" (click)="removeUtd(utd)">
+                <md-icon class="md-24">X</md-icon>
+            </button>
+
+        </div>
+
+        <pagination-controls class="pagination" (pageChange)="onPageChanged($event)"></pagination-controls>
+    </div>
+</div>

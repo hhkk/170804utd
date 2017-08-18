@@ -8,16 +8,22 @@ import { Utd2DetailsComponent } from "../obj/utds2/details/utd2-details.componen
 import { Utds3FormComponent } from '../obj/utds3/form/utds3-form.component';
 import { Utds3ListComponent } from '../obj/utds3/list/utds3-list.component';
 import { Utd3DetailsComponent } from "../obj/utds3/details/utd3-details.component";
+import { Utds4FormComponent } from '../obj/utds4/form/utds4-form.component';
+import { Utds4ListComponent } from '../obj/utds4/list/utds4-list.component';
+import { Utd4DetailsComponent } from "../obj/utds4/details/utd4-details.component";
 
 export const PARTIES_DECLARATIONS = [
-  PartiesFormComponent,
-  PartiesListComponent,
-  PartyDetailsComponent,
-  PartiesUploadComponent,
-  Utds2FormComponent,
-  Utds3FormComponent,
-  Utds2ListComponent,
-  Utds3ListComponent,
-  Utd2DetailsComponent,
-  Utd3DetailsComponent
+    PartiesFormComponent,
+    PartiesListComponent,
+    PartyDetailsComponent,
+    PartiesUploadComponent,
+    Utds2FormComponent,
+    Utds2ListComponent,
+    Utd2DetailsComponent,
+    Utd3DetailsComponent,
+    Utds3ListComponent,
+    Utds3FormComponent,
+    Utd4DetailsComponent,
+    Utds4ListComponent,
+    Utds4FormComponent,
 ];

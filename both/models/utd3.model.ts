@@ -3,7 +3,7 @@ import { CollectionObject } from './collection-object.model';
 export interface Utd3 extends CollectionObject {
   name: string;
   description: string;
-  location: Location;
+  location?: Location;
   owner?: string;
   public: boolean;
   invited?: string[];

@@ -7,6 +7,7 @@ class a1610116TestClassContructVars
 
     constructor (arg1:string) {
 
+        console.log ('in /both/utlities/a1610116TestClassContructVars.ts');
     }
 
 }

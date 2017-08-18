@@ -56,7 +56,7 @@ export class PartiesList implements OnInit, OnDestroy {
       }
 
       this.partiesSub = MeteorObservable.subscribe('partiesxx', options, location).subscribe(() => {
-        console.log(' ========================== running parties sub');
+        console.log('hbkhbk ========================== running parties sub');
         this.parties = Parties.find({}, {
           sort: {
             name: nameOrder
@@ -93,7 +93,7 @@ export class PartiesList implements OnInit, OnDestroy {
   }
 
   onPageChanged(page: number): void {
-    this.curPage.next(page);
+    this.curPage.next(page);x
   }
 
   changeSortOrder(nameOrder: string): void {

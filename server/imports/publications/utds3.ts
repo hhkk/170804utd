@@ -8,7 +8,7 @@ interface Options {
 }
 
 Meteor.publish('utds3ahbkpubname', function(options: Options, location?: string) {
-  console.log('===== in publish (utds3ahbkpubname)');
+  console.log('=====hbkhbk in publish (utds3ahbkpubname)');
 
   const selector = buildQuery.call(this, null, location);
 
@@ -18,7 +18,7 @@ Meteor.publish('utds3ahbkpubname', function(options: Options, location?: string)
 });
 
 Meteor.publish('indivUtdhbkpubname', function(utdId: string) {
-  console.log('======= in publish(indivUtdhbkpubname)');
+  console.log('=======hbkhbk in publish(indivUtdhbkpubname)');
 
   return Utds3.find(buildQuery.call(this, utdId));
 });

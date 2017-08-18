@@ -3,6 +3,7 @@ import { Meteor } from 'meteor/meteor';
 import { Parties } from '../../../both/collections/parties.collection';
 import { Utds2 } from '../../../both/collections/utds2.collection';
 import { Utds3 } from '../../../both/collections/utds3.collection';
+import { Utds4 } from '../../../both/collections/utds4.collection';
 
 Meteor.publish('uninvited', function (partyId: string) {
   const party = Parties.findOne(partyId);
@@ -45,6 +46,21 @@ Meteor.publish('uninvitedUtd3', function (utdId: string) {
     return Meteor.users.find({
         _id: {
             $nin: utd3.invited || [],
+            $ne: this.userId
+        }
+    });
+});
+
+Meteor.publish('uninvitedUtd4', function (utdId: string) {
+    const utd4= Utds4.findOne(utdId);
+
+    if (!utd4) {
+        throw new Meteor.Error('404', 'No such utdId:' + utdId);
+    }
+
+    return Meteor.users.find({
+        _id: {
+            // hbk $nin: utd4.invited || [],
             $ne: this.userId
         }
     });
