@@ -3,8 +3,8 @@
     <div class="utd-detailsxxcomponentselector">
       <md-card>
         <h2>{{ utd.name }}</h2>
-        <form layout="column" (submit)="saveUtd()">
-          <label>Utd Name: </label>
+        <form layout="column" (submit)="saveUtd3()">
+          <label>Utd3Name: </label>
           <md-input [disabled]="!isOwner" [(ngModel)]="utd.name" name="name"></md-input>
           <br />
           <label>Utd Description: </label>
@@ -13,7 +13,7 @@
           <label>Location name: </label>
           <md-input [disabled]="!isOwner" [(ngModel)]="utd.location.name" name="location"></md-input>
           <br />
-          <md-checkbox [disabled]="!isOwner" [(checked)]="utd.public" name="public" aria-label="Public">
+          <md-checkbox [disabled]="!isOwner" [(ngModel)]="utd.public" name="public" aria-label="Public">
             Public utd?
           </md-checkbox>
 xx

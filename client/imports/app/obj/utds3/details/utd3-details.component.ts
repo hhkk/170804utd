@@ -16,6 +16,8 @@ import { User } from '../../../../../../both/models/user.model';
 
 import template from './utd3-details.component.html';
 import style from './utd3-details.component.scss';
+import {UtilLog} from "../../../../../../both/utlities/UtilLog";
+import {UtdEnum} from "../../../../../../both/utlities/UtdEnum";
 
 console.log ('hbkhbk in client utds3-details.component.ts');
 
@@ -80,18 +82,19 @@ export class Utd3DetailsComponent implements OnInit, OnDestroy {
     }
   }
 
-  saveUtd() {
+  saveUtd3() {
     if (!Meteor.userId()) {
       alert('Please log in to change this utd');
       return;
     }
-    
+    //UtilLog.utdmLog("in saveUtd3 hbk!!! sunday", UtdEnum.Severity.INFO);
+    console.log ("in saveUtd3 hbk!!!!!!!!!!!!!!!!!!!! sunday");
     Utds3.update(this.utd._id, {
       $set: {
         name: this.utd.name,
         description: this.utd.description,
         location: this.utd.location,
-        'public': this.utd.public
+        public: this.utd.public
       }
     });
   }

@@ -44,7 +44,7 @@ export class Utds4FormComponent implements OnInit {
             let i;
             for (i = 0; i < 1; i++) {
                 if (this.addForm.valid) {
-                    alert('pre save in client/imports/app/obj/utds4/form/utds4-form.component.ts');
+                    UtilLog.log('pre save in client/imports/app/obj/utds4/form/utds4-form.component.ts');
                     try {
                         Utds4.insert({
                             //utd: this.addForm.value.name + '.' + i,

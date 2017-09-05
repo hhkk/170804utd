@@ -24,6 +24,7 @@
             <img *ngIf="utd.images && utd.images.length > 0" class="utd-main-image" [src]="utd | displayMainImage">
 
             <a [routerLink]="['/utd3', utd._id]">{{utd.name}}</a>
+            , public: {{utd.public}}
             , where: {{utd.location.name}}
             , desc: {{utd.description}}
 

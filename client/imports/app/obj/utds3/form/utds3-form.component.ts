@@ -39,7 +39,7 @@ export class Utds3FormComponent implements OnInit {
 
     addUtd(): void {
         //UtilLog.utdmLog('in utds3 utdsxx2-form.component.ts', UtilLog.SEVERITYy.INFO);
-        UtilLog.utdmLog('in utds3-form.component.ts.addUtd', UtdEnum.Severity.INFO);
+        UtilLog.log('in utds3-form.component.ts.addUtd');
         if (!Meteor.userId()) {
             alert('Please log in to add a utd');
             return;
@@ -49,7 +49,7 @@ export class Utds3FormComponent implements OnInit {
             let i;
             for (i = 0; i < 1; i++) {
                 if (this.addForm.valid) {
-                    alert('pre save in obj utds3');
+                    UtilLog.log('pre save in obj utds3');
                     try {
                         Utds3.insert({
                             //utd: this.addForm.value.name + '.' + i,

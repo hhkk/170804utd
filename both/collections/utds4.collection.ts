@@ -1,11 +1,12 @@
 import { MongoObservable } from 'meteor-rxjs';
 import { Meteor } from 'meteor/meteor';
-
-import { Utd3 }  from '../models/utd3.model';
 import {Utd4} from "../models/utd4.model";
+import { UtilLog } from "../../both/utlities/UtilLog";
+import { UtdEnum } from "../../both/utlities/UtdEnum";
 
 export const Utds4 = new MongoObservable.Collection<Utd4>('utds4ahbkpubname');
-console.log ('hbkhbk in utds4.collection.ts');
+UtilLog.utdmLog("@@@@@@@@@@@@@@ hbkhbk in utds4.collection.ts main", UtdEnum.Severity.INFO);
+
 
 function loggedIn() {
   return !!Meteor.user();

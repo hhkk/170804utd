@@ -2,20 +2,27 @@ import { Meteor } from 'meteor/meteor';
 import { Counts } from 'meteor/tmeasday:publish-counts';
 
 import { Utds4 } from '../../../both/collections/utds4.collection';
+import {UtilLog} from "../../../both/utlities/UtilLog";
+import {UtdEnum} from "../../../both/utlities/UtdEnum";
 
 interface Options {
     [key: string]: any;
 }
 
 Meteor.publish('utds4ahbkpubname', function(options: Options, location?: string) {
-    console.log('=====hbkhbk in publish (utds4ahbkpubname)');
 
-    const selector = buildQuery.call(this, null, location);
+        UtilLog.utdmLog("=====hbkhbk in publish (utds4ahbkpubnam e)", UtdEnum.Severity.INFO);
 
-    Counts.publish(this, 'numberOfUtds', Utds4.collection.find(selector), { noReady: true });
+        const selector = buildQuery.call(this, null, location);
 
-    return Utds4.find(selector, options);
-});
+        Counts.publish(this, 'numberOfUtds', Utds4.collection.find(selector), { noReady: true });
+
+        return Utds4.find(selector, options);
+    }
+
+
+
+);
 
 Meteor.publish('indivUtdhbkpubname4', function(utdId: string) {
     console.log('=======hbkhbk in publish(indivUtdhbkpubname4)');
@@ -25,6 +32,7 @@ Meteor.publish('indivUtdhbkpubname4', function(utdId: string) {
 
 
 function buildQuery(utdId?: string, location?: string): Object {
+    UtilLog.utdmLog("in buildquery", UtdEnum.Severity.INFO);
     const isAvailable = {
         $or:
             [
@@ -58,5 +66,6 @@ function buildQuery(utdId?: string, location?: string): Object {
 
     const searchRegEx = { '$regex': '.*' + (location || '') + '.*', '$options': 'i' };
 
+    //return searchRegEx;
     return {};
 }

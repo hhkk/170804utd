@@ -6,6 +6,8 @@ import {MeteorObservable} from "meteor-rxjs";
 import {Utds4} from "../../../../both/collections/utds4.collection";
 import {Counts} from "meteor/tmeasday:publish-counts";
 import {InjectUser} from "angular2-meteor-accounts-ui";
+import { UtilLog } from "../../../../both/utlities/UtilLog";
+import { UtdEnum } from "../../../../both/utlities/UtdEnum";
 
 interface Pagination {
     limit: number;
@@ -20,6 +22,7 @@ interface Options extends Pagination {
 export class Utds4List implements OnInit, OnDestroy {
     utdsxx2: Observable<Utd4[]>;
     utdsSub: Subscription;
+    // Subject is a special type of Observable that allows values to be multicasted to many Observers. While plain Observables are unicast
     pageSize: Subject<number> = new Subject<number>();
     curPage: Subject<number> = new Subject<number>();
     nameOrder: Subject<number> = new Subject<number>();
@@ -46,7 +49,7 @@ export class Utds4List implements OnInit, OnDestroy {
             const options: Options = {
                 limit: pageSize as number,
                 skip: ((curPage as number) - 1) * (pageSize as number),
-                sort: { name: nameOrder as number }
+                sort: {name: nameOrder as number}
             };
 
             this.paginationService.setCurrentPage(this.paginationService.defaultId, curPage as number);
@@ -56,7 +59,8 @@ export class Utds4List implements OnInit, OnDestroy {
             }
 
             this.utdsSub = MeteorObservable.subscribe('utds4ahbkpubname', options, location).subscribe(() => {
-                console.log(' hbkhbk ========================== running utds4 sub');
+                UtilLog.log(' hbkhbk ========================== running utds4 sub');
+
                 this.utdsxx2 = Utds4.find({}, {
                     sort: {
                         name: nameOrder
@@ -84,12 +88,13 @@ export class Utds4List implements OnInit, OnDestroy {
     }
 
     removeUtd(utd: Utd4): void {
+        UtilLog.utdmLog("lookin good!!!!!!!!!!! ", UtdEnum.Severity.INFO);
         Utds4.remove(utd._id);
     }
 
     search(value: string): void {
         this.curPage.next(1);
-        // hbk this.location.next(value);
+        this.location.next(value);
     }
 
     onPageChanged(page: number): void {

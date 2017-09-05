@@ -2,13 +2,16 @@ import { Meteor } from 'meteor/meteor';
 import { Counts } from 'meteor/tmeasday:publish-counts';
 
 import { Utds3 } from '../../../both/collections/utds3.collection';
+import {UtdEnum} from "../../../both/utlities/UtdEnum";
+import {UtilLog} from "../../../both/utlities/UtilLog";
 
 interface Options {
   [key: string]: any;
 }
 
 Meteor.publish('utds3ahbkpubname', function(options: Options, location?: string) {
-  console.log('=====hbkhbk in publish (utds3ahbkpubname)');
+
+  UtilLog .utdmLog("=====hbkhbk in publish (utds3ahbkpubname)'", UtdEnum.Severity.INFO);
 
   const selector = buildQuery.call(this, null, location);
 
@@ -16,6 +19,8 @@ Meteor.publish('utds3ahbkpubname', function(options: Options, location?: string)
 
   return Utds3.find(selector, options);
 });
+
+console.log('=====hbkhbk2 in publish (utds3ahbkpubname)');
 
 Meteor.publish('indivUtdhbkpubname', function(utdId: string) {
   console.log('=======hbkhbk in publish(indivUtdhbkpubname)');

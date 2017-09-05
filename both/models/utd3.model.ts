@@ -1,6 +1,6 @@
 import { CollectionObject } from './collection-object.model';
 
-export interface Utd3 extends CollectionObject {
+export interface  Utd3 extends CollectionObject {
   name: string;
   description: string;
   location?: Location;

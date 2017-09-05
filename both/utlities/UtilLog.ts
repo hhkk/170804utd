@@ -1,9 +1,6 @@
 //import { UtilLog } from '../../../../../../both/utlities/UtilLog';
 import { UtdEnum } from './UtdEnum';
 
-/**
- * Created by Owner on 10/30/2016.
- */
 
     // export const enum SEV {
     //     WARN,
@@ -46,9 +43,25 @@ import { UtdEnum } from './UtdEnum';
 //
 //     constructor() {};
 // }
+
+
+
+
+// typescript global static variable https://stackoverflow.com/questions/16462839/typescript-global-static-variable-best-practice
+module M {
+    export class C {
+        static count : number = 0;
+        constructor() {
+            C.count++;
+        }
+    }
+}
+
+
+
 export class UtilLog {
 
-
+    private static x = 1;
 
     // public static logErrorUtd(e, alertbool:boolean, sev:SEVERITYx):string {
     //     let r = '';
@@ -86,16 +99,78 @@ export class UtilLog {
     // };
 
     // works: public static log(s):void {
-    public static utdmLog(s:String, severity:UtdEnum.Severity):void {
-        s = 'UTILLOG:sev:' + severity + ', s:' + s;
 
-        //console.log(severity.constructor.name);
-        //console.log(severity.????);
+    private static incr = (function () {
+        var i = 1;
+
+        return function () {
+            return i++;
+        }
+    })();
+
+
+
+        // NEW WAY
+        // public static utdmLog(s:String, severity:UtdEnum.Severity):void {
+        //
+        //     //global.callCnt_utdmLog  || (global.callCnt_utdmLog = 0);
+        //     if (!global.callCnt_utdmLog) {
+        //         global.callCnt_utdmLog = 0
+        //     };
+        //     global.callCnt_utdmLog++;
+        //
+        //     s = 'UTILLOG:sev:' + severity + ', s:' + s;
+        //     //callCnt++;
+        //     let cnt = UtilLog.incr();
+        //     //console.log(severity.constructor.name);
+        //     //console.log(severity.????);
+        //     if (Meteor.isServer) {
+        //         console.log ("+++++++++++++++++++++++from utillog server: global.callCnt_utdmLog: <" + global.callCnt_utdmLog + "> :" + s);
+        //     } else {
+        //         //eval ("alert ('============================= eval in utd2s.methods.ts must be client');");
+        //         alert ('+++++++++++++++++++++++++++from utillog client: global.callCnt_utdmLog: <' + global.callCnt_utdmLog + "> :" + 'client side log [' + s + ']');
+        //     }
+        //     // if (Meteor.isServer) {
+        //     //     console.log ("+++++++++++++++++++++++from utillog server: cnt: <" + cnt + "> :" + s);
+        //     // } else {
+        //     //     //eval ("alert ('============================= eval in utd2s.methods.ts must be client');");
+        //     //     alert ('+++++++++++++++++++++++++++from utillog client: cnt: <' + cnt + "> :" + 'client side log [' + s + ']');
+        //     // }
+        // }
+
+    // OLD WAY
+    // public static utdmLog(s:String, severity:UtdEnum.Severity):void {
+    //
+    //     s = 'UTILLOG:sev:' + severity + ', s:' + s;
+    //     let cnt = UtilLog.incr();
+    //     if (Meteor.isServer) {
+    //         console.log ("+++++++++++++++++++++++from utillog server: cnt: <" + cnt + "> :" + s);
+    //     } else {
+    //         //eval ("alert ('============================= eval in utd2s.methods.ts must be client');");
+    //         alert ('+++++++++++++++++++++++++++from utillog client: cnt: <' + cnt + "> :" + 'client side log [' + s + ']');
+    //     }
+    // }¸¸¸
+
+    // THIRD WAY
+    //console.log ('this1:' + this);
+    public static log(s:String):void {
+        this.utdmLog(s, UtdEnum.Severity.INFO);
+    }
+
+    public static utdmLog(s:String, severity:UtdEnum.Severity):void {
+        if (UtilLog.x == null)  {UtilLog.x = 0;} UtilLog.x++; // call counter
+
+        s = 'sev:' + severity + ', s:' + s;
+        let cnt = UtilLog.incr();
         if (Meteor.isServer) {
-            console.log (s);
+            console.log ("logx: <" + UtilLog.x + "> [" + s + ']');
         } else {
             //eval ("alert ('============================= eval in utd2s.methods.ts must be client');");
-            alert ('client side log [' + s + ']');
+            console.log ('logx:: <' + UtilLog.x + "> [" + s + ']');
         }
+        //console.log ("thishbk");
     }
+
+
+
 }
