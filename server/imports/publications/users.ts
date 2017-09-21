@@ -4,6 +4,7 @@ import { Parties } from '../../../both/collections/parties.collection';
 import { Utds2 } from '../../../both/collections/utds2.collection';
 import { Utds3 } from '../../../both/collections/utds3.collection';
 import { Utds4 } from '../../../both/collections/utds4.collection';
+import { Utds42 } from '../../../both/collections/utds42.collection';
 
 Meteor.publish('uninvited', function (partyId: string) {
   const party = Parties.findOne(partyId);

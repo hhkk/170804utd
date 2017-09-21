@@ -20,10 +20,11 @@
         <pagination-controls class="pagination" (pageChange)="onPageChanged($event)"></pagination-controls>
 
         <div *ngFor="let utd of utdsxx2 | async" class="utd-card">
-top---------------------------------------<br>
+<!--top2---------------------------------------<br>-->
             <img *ngIf="utd.images && utd.images.length > 0" class="utd-main-image" [src]="utd | displayMainImage">
 
-            <a [routerLink]="['/utd4', utd._id]">{{utd.utdstr}}</a>
+            <!--<a [routerLink]="['/utd4', utd._id]">{{utd.utdstr}}</a>-->
+            {{utd.date}}<a [routerLink]="['/utd4', utd._id]">xx{{utd.text}}</a>
 
             <button class="remove-utd" md-icon-button *ngIf="isOwner(utd)" (click)="removeUtd(utd)">
                 <md-icon class="md-24">X</md-icon>

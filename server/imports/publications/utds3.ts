@@ -11,7 +11,7 @@ interface Options {
 
 Meteor.publish('utds3ahbkpubname', function(options: Options, location?: string) {
 
-  UtilLog .utdmLog("=====hbkhbk in publish (utds3ahbkpubname)'", UtdEnum.Severity.INFO);
+  //UtilLog .utdmLog("=====hbkhbk in publish (utds3ahbkpubname)'", UtdEnum.Severity.INFO);
 
   const selector = buildQuery.call(this, null, location);
 
@@ -20,10 +20,10 @@ Meteor.publish('utds3ahbkpubname', function(options: Options, location?: string)
   return Utds3.find(selector, options);
 });
 
-console.log('=====hbkhbk2 in publish (utds3ahbkpubname)');
+console.log('hbkhbk2 in publish (utds3ahbkpubname)');
 
 Meteor.publish('indivUtdhbkpubname', function(utdId: string) {
-  console.log('=======hbkhbk in publish(indivUtdhbkpubname)');
+  console.log('hbkhbk in publish(indivUtdhbkpubname)');
 
   return Utds3.find(buildQuery.call(this, utdId));
 });
