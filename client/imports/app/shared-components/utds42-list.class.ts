@@ -26,13 +26,13 @@ export class Utds42List implements OnInit, OnDestroy {
     utdsxx2: Observable<Utd42[]>;
     utdsSub: Subscription;
     // Subject is a special type of Observable that allows values to be multicasted to many Observers. While plain Observables are unicast
-    pageSize: Subject<number> = new Subject<number>();
-    curPage: Subject<number> = new Subject<number>();
+    pageSize:  Subject<number> = new Subject<number>();
+    curPage:   Subject<number> = new Subject<number>();
     nameOrder: Subject<number> = new Subject<number>();
+    location:  Subject<string> = new Subject<string>();
     optionsSub: Subscription;
     utdsSize: number = 0;
     autorunSub: Subscription;
-    location: Subject<string> = new Subject<string>();
     user: Meteor.User;
     imagesSubs: Subscription;
 
@@ -52,7 +52,7 @@ export class Utds42List implements OnInit, OnDestroy {
             const options: Options = {
                 limit: pageSize as number,
                 skip: ((curPage as number) - 1) * (pageSize as number),
-                sort: {name: nameOrder as number}
+                sort: {filelineraw: nameOrder as number}
             };
 
             this.paginationService.setCurrentPage(this.paginationService.defaultId, curPage as number);
@@ -61,7 +61,7 @@ export class Utds42List implements OnInit, OnDestroy {
                 this.utdsSub.unsubscribe();
             }
 
-            // this client file connects to/calls file /Users/hkon/utd/170804utd/server/imports/publications/utds42.ts
+            // this CLIENT file connects to/calls file /Users/hkon/utd/170804utd/server/imports/publications/utds42.ts
             // so a publication is called by a shared component in the pub-sub framework
             this.utdsSub = MeteorObservable.subscribe('utdbase', options, location).subscribe(() => {
                 UtilLog.log(' hbkhbk ===== client side utds42 subscriber  ========================== ');
@@ -100,6 +100,10 @@ export class Utds42List implements OnInit, OnDestroy {
     }
 
     search(value: string): void {
+        //UtilLog.utdmLog("lookin good SEARCH !!!!!!!!!!! 1", UtdEnum.Severity.INFO);
+        //let a = $location.search();
+        UtilLog.utdmLog(" ================ slookin good SEARCH !!!!!!!!!!! 2:" + value , UtdEnum.Severity.INFO);
+
         this.curPage.next(1);
         this.location.next(value);
     }

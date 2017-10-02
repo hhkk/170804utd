@@ -4,7 +4,9 @@ import {UtilLog} from "../../../both/utlities/UtilLog";
 import {UtdEnum} from "../../../both/utlities/UtdEnum";
 
 export function loadUtds() {
-  UtilLog.utdmLog('', UtdEnum.Severity.INFO)
+  UtilLog.utdmLog('', UtdEnum.Severity.INFO);
+  UtilLog.utdmLog("~~~~~~~~~~~~ utds42 fixture ~~~~~~~~~~~~ count:" + Utds42.find().cursor.count(), UtdEnum.Severity.INFO);
+
   if (Utds42.find().cursor.count() === 0) {
     UtilLog.log('resetting utd42');
     const utds42: Utd42[] = [{

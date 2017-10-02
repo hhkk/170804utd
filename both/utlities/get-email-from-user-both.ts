@@ -21,8 +21,7 @@ export class GetEmailFromUserBoth {
         //
         //     console.log('usersFindFetch2[0]._id:' + usersFindFetch[0]._id);
         //     console.log('usersFindFetch[0]._id:' + usersFindFetch[0]._id);
-        //     console.log('usersFindFetch[0].emails[0].address:' + usersFindFetch[0].emails[0].address);
-        //
+        //     console.log('usersFindFetch[0].emails[0].address:' + usersFindFetch[0].emails[0].address);//
         //     for (var i in window) {
         //         if (window.hasOwnProperty(i))
         //             console.log(i);

@@ -156,8 +156,11 @@ export class UtilLog {
     public static log(s:String):void {
         this.utdmLog(s, UtdEnum.Severity.INFO);
     }
+    public static logError(s:String, e):void {
+        this.utdmLog(e.toString(), UtdEnum.Severity.ERROR);
+    }
 
-    public static utdmLog(s:String, severity:UtdEnum.Severity):void {
+    public static utdmLog(s:String, severity?:UtdEnum.Severity):void {
         if (UtilLog.x == null)  {UtilLog.x = 0;} UtilLog.x++; // call counter
 
         s = 'sev:' + severity + ', s:' + s;

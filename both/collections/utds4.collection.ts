@@ -5,7 +5,7 @@ import { UtilLog } from "../../both/utlities/UtilLog";
 import { UtdEnum } from "../../both/utlities/UtdEnum";
 
 export const Utds4 = new MongoObservable.Collection<Utd4>('utds4ahbkpubname');
-UtilLog.utdmLog("@@@@@@@@@@@@@@ hbkhbk in utds4.collection.ts main", UtdEnum.Severity.INFO);
+//UtilLog.utdmLog("@@@@@@@@@@@@@@ hbkhbk in utds4.collection.ts main", UtdEnum.Severity.INFO);
 
 
 function loggedIn() {
