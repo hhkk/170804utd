@@ -138,7 +138,7 @@ function buildQuery(utdId?: string, location?: string): Object {
 
 } // end buildQuery()
 
-
+// hi mom 
 function buildRegExpStr(location?: string ): Object {
 
  try {
