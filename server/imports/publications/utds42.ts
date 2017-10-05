@@ -13,6 +13,8 @@ Meteor.publish('utdbase', function(options: Options, location?: string) {
 
         let locationTruncated = location.trim();
 
+
+        if (!(locationTruncated === ""))
         //if ( !locationTruncated || !locationTruncated.length)
         {
 
@@ -53,8 +55,8 @@ Meteor.publish('indivUtdhbkpubname4', function(utdId: string) {
 });
 
 
-function buildQuery(utdId?: string, location?: string): Object {
-    UtilLog.utdmLog("@@@@@@@@@@@@@@@@@@@ in buildquery location:" + location, UtdEnum.Severity.INFO);
+function buildQuery(utdId?: string, utdSearchRaw?: string): Object {
+    UtilLog.utdmLog("@@@@@@@@@@@@@@@@@@@ in buildquery location:" + utdSearchRaw, UtdEnum.Severity.INFO);
     const isAvailable = {
         $or:
             [
@@ -88,50 +90,43 @@ function buildQuery(utdId?: string, location?: string): Object {
 
 
 
-    let searchRegEx = null;
+    let searchArrayRegEx = null;
     if (true)
     {
-        // const searchRegEx = { '$regex': '.*' + (location || '') + '.*', '$options': 'i' };
-        let himom = 'leah';
-        // works const searchRegEx = {filelineraw: { $regex: /hbk/, $options:'i' }};
+        // const searchArrayRegEx = { '$regex': '.*' + (location || '') + '.*', '$options': 'i' };
+        // works const searchArrayRegEx = {filelineraw: { $regex: /hbk/, $options:'i' }};
         // filelineraw!!!!!!!!!!
 
-        // works as string hbk const  searchRegEx = {filelineraw: { $regex: /.*hbk.*/, $options:'i' }};
-        // works searchRegEx = {filelineraw: { $regex: /.*hbk.*/, $options:'i' }};
+        // works as string hbk const  searchArrayRegEx = {filelineraw: { $regex: /.*hbk.*/, $options:'i' }};
+        // works searchArrayRegEx = {filelineraw: { $regex: /.*hbk.*/, $options:'i' }};
         // OR operator https://stackoverflow.com/questions/28290021/javascript-regular-expression-or-operator
         // https://stackoverflow.com/questions/1177081/multiple-words-in-any-order-using-regex  (?=.*test)(?=.*long)
-        // works 170930 searchRegEx = {filelineraw: { $regex: new RegExp(".*"+location+".*"), $options:'i' }};
+        // works 170930 searchArrayRegEx = {filelineraw: { $regex: new RegExp(".*"+location+".*"), $options:'i' }};
 
+        //searchArrayRegEx = {filelineraw: { $regex: new RegExp(
+        //                                ".*" + location + ".*" +
+        //                                "|.*" + 'hbk' +
+        //                                ".*"
+        //                           ), $options:'i' }};
 
-        searchRegEx = {filelineraw: { $regex: new RegExp(
-                                        ".*" + location + ".*" +
-                                        "|.*" + 'hbk' +
-                                        ".*"
-                                    ), $options:'i' }};
+        //let regExpStr = buildRegExpStr.call(this, location);
 
-
-        let regExpStr = buildRegExpStr.call(this, location);
-
-
-        searchRegEx = {filelineraw: { $regex: new RegExp(regExpStr)
-                                     , $options:'i' }};
-
-
-        // works retired 170930 const searchRegEx = {filelineraw: { $regex: re, $options:'i' }};
-        // broken const searchRegEx = {{filelineraw: { $regex: /HBK/, $options:'i' }, sort : { filelineraw : 1 }};
+        searchArrayRegEx = {filelineraw: { $regex: new RegExp( buildRegExpStr.call(this, utdSearchRaw)), $options:'i' }};
+        // works retired 170930 const searchArrayRegEx = {filelineraw: { $regex: re, $options:'i' }};
+        // broken const searchArrayRegEx = {{filelineraw: { $regex: /HBK/, $options:'i' }, sort : { filelineraw : 1 }};
         //sort : { items.date : 1 }
-    //    UtilLog.utdmLog("ttt in buildquery searchRegEx:" + searchRegEx.toString(), UtdEnum.Severity.INFO);
-   //     UtilLog.utdmLog("ttt in buildquery location:" + location, UtdEnum.Severity.INFO);
+        //    UtilLog.utdmLog("ttt in buildquery searchArrayRegEx:" + searchArrayRegEx.toString(), UtdEnum.Severity.INFO);
+        //     UtilLog.utdmLog("ttt in buildquery location:" + location, UtdEnum.Severity.INFO);
 
     }
     else
     {
             // https://stackoverflow.com/questions/26246601/wildcard-string-comparison-in-javascript
-        //searchRegEx = {filelineraw: { $regex: new RegExp(".*"+location+".*"), $options:'i' };
+        //searchArrayRegEx = {filelineraw: { $regex: new RegExp(".*"+location+".*"), $options:'i' };
 
     }
-    return searchRegEx;
-    //  UtilLog.utdmLog("in buildquery searchRegEx:" + searchRegEx.toString(), UtdEnum.Severity.INFO);
+    return searchArrayRegEx;
+    //  UtilLog.utdmLog("in buildquery searchArrayRegEx:" + searchArrayRegEx.toString(), UtdEnum.Severity.INFO);
     // ommented 9/17/17 return {};
     //return {, '$options':''};
             //return {};
