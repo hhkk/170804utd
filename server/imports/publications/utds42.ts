@@ -20,11 +20,12 @@ Meteor.publish('utdbase', function(options: Options, location?: string) {
 
             //UtilLog.utdmLog("~~~~~~~~~~~~~~~~~ hbkhbk in publish (utdbase) LOCATION 2 NULL OR NOT NULL ["+locationTruncated+"]", UtdEnum.Severity.INFO);
             // this SERVER side utdbase (42) query
-            const selector = buildQuery.call(this, null, locationTruncated);
+            const searchArrayRegEx = buildQuery.call(this, null, locationTruncated);
 
-            Counts.publish(this, 'numberOfUtds', Utds42.collection.find(selector), { noReady: true });
+            Counts.publish(this, 'numberOfUtds', Utds42.collection.find(searchArrayRegEx, {sort : { filelineraw : -1 }}), { noReady: true, sort : { filelineraw : -1 } });
+            //Counts.publish(this, 'numberOfUtds', Utds42.collection.find(searchArrayRegEx), { noReady: true , sort : { filelineraw : '-1' }});
 
-            return Utds42.find(selector, options);
+            return Utds42.find(searchArrayRegEx, options);
         }
         //else {
         // UtilLog.utdmLog("~~~~~~~~~~~~~~~~~ hbkhbk in publish (utdbase) LOCATION NULL DO NOTHING", UtdEnum.Severity.INFO);
@@ -112,6 +113,7 @@ function buildQuery(utdId?: string, utdSearchRaw?: string): Object {
         //let regExpStr = buildRegExpStr.call(this, location);
 
         searchArrayRegEx = {filelineraw: { $regex: new RegExp( buildRegExpStr.call(this, utdSearchRaw)), $options:'i' }};
+        // sort tested 171012 searchArrayRegEx = {filelineraw: { $regex: new RegExp( buildRegExpStr.call(this, utdSearchRaw)), $options:'i' }, sort : { filelineraw : 1 }};
         // works retired 170930 const searchArrayRegEx = {filelineraw: { $regex: re, $options:'i' }};
         // broken const searchArrayRegEx = {{filelineraw: { $regex: /HBK/, $options:'i' }, sort : { filelineraw : 1 }};
         //sort : { items.date : 1 }

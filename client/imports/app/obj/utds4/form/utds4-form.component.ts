@@ -1,13 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Utds4 } from '../../../../../../both/collections/utds4.collection';
+import { Utds42 } from '../../../../../../both/collections/utds42.collection';
 //import {UtilLog} from '../../../../../../both/utlities/UtilLog';
 import { UtilLog } from '../../../../../../both/utlities/UtilLog';
 import { UtdEnum } from '../../../../../../both/utlities/UtdEnum';
+import { UtilDate } from '../../../../../../both/utlities/UtilDate';
 
 import { InjectUser } from "angular2-meteor-accounts-ui";
 import template from './utds4-form.component.html';
 import style from './utds4-form.component.scss';
+import {MeteorObservable} from "meteor-rxjs";
+import user = Meteor.user;
 
 @Component({
     selector: 'utds-formx2634',
@@ -46,11 +49,59 @@ export class Utds4FormComponent implements OnInit {
                 if (this.addForm.valid) {
                     UtilLog.log('pre save in client/imports/app/obj/utds4/form/utds4-form.component.ts');
                     try {
-                        Utds4.insert({
-                            //utd: this.addForm.value.name + '.' + i,
-                            utdstr: this.addForm.value.utdstr,
+
+                        this.getTexthk.call(this);
+
+                        alert('pre call');
+                        //Meteor.call('hbkTestCallToServer', this);
+
+                        // works 171014
+                        //       MeteorObservable.call('hbkTestCallToServer', Meteor.userId()).subscribe(() => {
+                        //     //MeteorObservable.call('hbkTestCallToServer', this.utd._id, user._id).subscribe(() => {
+                        //         alert('User successfully invited to this utd3.');
+                        //     }, (error) => {
+                        //         alert(`Failed utd invite to invite due to ${error}`);
+                        //     });
+                        // end works 171014
+
+// from https://docs.meteor.com/api/methods.html
+
+                        // synch with no callback I guess
+                        // Synchronous call
+                        // const result = Meteor.call('foo', 1, 2);
+
+
+                        // asynch works 171014b
+                        Meteor.call('hbkTestCallToServer', 1, 6, (error, result) => {
+                            if (error)
+                                alert ('error:'+error);
+                            if (result)
+                                alert ('result:'+result);
+                            if (!error &&  !result)
+                                alert ('neither error nor result');
+
+                        });
+                        // end works 171014b
+
+                        // works but no return 171014c
+                        //                      const x = Meteor.call('hbkTestCallToServer', 1, 4);
+                        // end works but no return 171014c
+
+
+
+
+                        //alert('post call x:' + x);
+
+
+                        let dt = UtilDate.getDateStr(new Date()).toString();
+                        Utds42.insert({
+                            //datey: dt,
+                            filelineraw: dt + ' ' + this.addForm.value.utdstr,
+                            //texty: this.addForm.value.utdstr,
                             public: this.addForm.value.public,
-                            owner: Meteor.userId()
+                            owner: Meteor.userId(),
+                            date: dt,
+                            text: this.addForm.value.utdstr,
                         });
                     } catch (err) {
                         console.log(err.stack);
@@ -67,6 +118,37 @@ export class Utds4FormComponent implements OnInit {
             this.addForm.reset();
         }
     }
+
+
+    //
+    getTexthk(){
+        UtilLog.log('in getText=================');
+        //     // read text from URL location
+        //     var request = new XMLHttpRequest();
+        //     request.open('GET', 'http://www.puzzlers.org/pub/wordlists/pocket.txt', true);
+        //     request.send(null);
+        //     request.onreadystatechange = function () {
+        //         if (request.readyState === 4 && request.status === 200) {
+        //             var type = request.getResponseHeader('Content-Type');
+        //             if (type.indexOf("text") !== 1) {
+        //                 return request.responseText;
+        //             }
+        //         }
+        //     }
+    }
+
+    // from /Users/hkon/utd/170804utd/client/imports/app/obj/utds3/details/utd3-details.component.ts
+    // inviteUtd3Methodhbkhbk
+    // hbkTestCallToServer (user: Meteor.User) {
+    //
+    //     //  example call Meteor.call('createPlayer'); // from http://meteortips.com/first-meteor-tutorial/methods/
+    //
+    //     MeteorObservable.call('hbkTestCallToServer', this.utd._id, user._id).subscribe(() => {
+    //         alert('User successfully invited to this utd3.');
+    //     }, (error) => {
+    //         alert(`Failed utd invite to invite due to ${error}`);
+    //     });
+    // }
 
     onImage(imageId: string) {
         this.images.push(imageId);

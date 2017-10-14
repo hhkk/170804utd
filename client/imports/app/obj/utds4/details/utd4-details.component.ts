@@ -88,7 +88,7 @@ export class Utd4DetailsComponent implements OnInit, OnDestroy {
     
     Utds4.update(this.utd._id, {
       $set: {
-        utdstr: this.utd.utdstr,
+        //utdstr: this.utd.utdstr,
         'public': this.utd.public
       }
     });

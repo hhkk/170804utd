@@ -23,7 +23,7 @@ interface Options extends Pagination {
 
 @InjectUser('user')
 export class Utds42List implements OnInit, OnDestroy {
-    utdsxx2: Observable<Utd42[]>;
+    utdsxx2_42: Observable<Utd42[]>;
     utdsSub: Subscription;
     // Subject is a special type of Observable that allows values to be multicasted to many Observers. While plain Observables are unicast
     pageSize:  Subject<number> = new Subject<number>();
@@ -66,11 +66,12 @@ export class Utds42List implements OnInit, OnDestroy {
             this.utdsSub = MeteorObservable.subscribe('utdbase', options, location).subscribe(() => {
                 UtilLog.log(' hbkhbk ===== client side utds42 subscriber  ========================== ');
 
-                this.utdsxx2 = Utds42.find({}, {
+                // works this.utdsxx2_42 = Utds42.find({text:/.*hbk.*/}, {
+                this.utdsxx2_42 = Utds42.find({}, {
                     sort: {
-                       // works text: 1
-                       // works filelineraw: -1
-                       filelineraw: -1
+                        // works text: 1
+                        // works filelineraw: -1
+                        filelineraw: -1
                     }
                 }).zone();
             });

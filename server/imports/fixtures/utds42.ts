@@ -8,20 +8,20 @@ export function loadUtds() {
   UtilLog.utdmLog("~~~~~~~~~~~~ utds42 fixture ~~~~~~~~~~~~ count:" + Utds42.find().cursor.count(), UtdEnum.Severity.INFO);
 
   if (Utds42.find().cursor.count() === 0) {
-    UtilLog.log('resetting utd42');
-    const utds42: Utd42[] = [{
-      text: 'Dubstep-Free Zone',
-      public: true
-    }, {
-      text: 'All dubstep all the time',
-      public: true
-    }, {
-      text: 'Savage lounging',
-      public: false
-    }];
-
-    utds42.forEach((utd42: Utd42) => Utds42.insert(utd42
-
-    ));
+    UtilLog.log('resetting utd42============================= ');
+    // const utds42: Utd42[] = [{
+    //   text: 'Dubstep-Free Zone',
+    //   public: true
+    // }, {
+    //   text: 'All dubstep all the time',
+    //   public: true
+    // }, {
+    //   text: 'Savage lounging',
+    //   public: false
+    // }];
+    //
+    // utds42.forEach((utd42: Utd42) => Utds42.insert(utd42
+    //
+    // ));
   }
 }
