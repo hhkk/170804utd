@@ -52,7 +52,7 @@ export class Utds4FormComponent implements OnInit {
 
                         this.getTexthk.call(this);
 
-                        alert('pre call');
+                        //alert('pre call');
                         //Meteor.call('hbkTestCallToServer', this);
 
                         // works 171014
@@ -71,17 +71,36 @@ export class Utds4FormComponent implements OnInit {
                         // const result = Meteor.call('foo', 1, 2);
 
 
+
+
+
+
                         // asynch works 171014b
-                        Meteor.call('hbkTestCallToServer', 1, 6, (error, result) => {
+                        // Meteor.call('hbkTestCallToServer', 1, 6, (error, result) => {
+                        //     if (error)
+                        //         alert ('error:'+error);
+                        //     if (result)
+                        //         alert ('result:'+result);
+                        //     if (!error &&  !result)
+                        //         alert ('neither error nor result');
+                        //
+                        // });
+                        // end works 171014b
+
+
+                        // synch - try
+                        Meteor.call('hbkTestCallToServer2', 'utdidhbk', 'rsvphbk', (error, result) => {
                             if (error)
-                                alert ('error:'+error);
+                                alert ('error2:'+error);
                             if (result)
-                                alert ('result:'+result);
+                                alert ('result2:'+result);
                             if (!error &&  !result)
-                                alert ('neither error nor result');
+                                alert ('2neither error nor result');
 
                         });
                         // end works 171014b
+
+
 
                         // works but no return 171014c
                         //                      const x = Meteor.call('hbkTestCallToServer', 1, 4);
