@@ -49,7 +49,7 @@ export class Utds3FormComponent implements OnInit {
             let i;
             for (i = 0; i < 1; i++) {
                 if (this.addForm.valid) {
-                    UtilLog.log('pre save in obj utds3');
+                    UtilLog.log('======================== pre save in obj utds3:' + this.addForm.value.description);
                     try {
                         Utds3.insert({
                             //utd: this.addForm.value.name + '.' + i,

@@ -47,7 +47,7 @@ export class Utds4FormComponent implements OnInit {
             let i;
             for (i = 0; i < 1; i++) {
                 if (this.addForm.valid) {
-                    UtilLog.log('pre save in client/imports/app/obj/utds4/form/utds4-form.component.ts');
+                    UtilLog.log('pre save in client/imports/app/obj/utds4/form/utds4-form.component.ts:' + this.addForm.value.utdstr);
                     try {
 
                         this.getTexthk.call(this);
@@ -87,20 +87,29 @@ export class Utds4FormComponent implements OnInit {
                         // });
                         // end works 171014b
 
+                        UtilLog.log('pre xxxxx save in client/imports/app/obj/utds4/form/utds4-form.component.ts');
 
                         // synch - try
-                        Meteor.call('hbkTestCallToServer2', 'utdidhbk', 'rsvphbk', (error, result) => {
-                            if (error)
-                                alert ('error2:'+error);
-                            if (result)
-                                alert ('result2:'+result);
-                            if (!error &&  !result)
-                                alert ('2neither error nor result');
+                        try {
+                            // Meteor.call('hbkTestCallToServer4', 'utdidhbk', 'rsvphbk', (error, result) => {
+                            Meteor.call('hbkTestCallToServer4', this.addForm.value.utdstr, 'rsvphbk', function (error, result)  {
+                                console.log('========================== in callback from hbkTestCallToServer4');
+                                if (error)
+                                    alert ('error2:'+error);
+                                if (result)
+                                    alert ('result2:'+result);
+                                if (!error &&  !result)
+                                    alert ('2neither error nor result');
 
-                        });
+                            });
+
+                        } catch(e) {
+                            console.log ('eeeeeeeeeeeeeeeeeefffffff');
+                            UtilLog.logError('hbkTestCallToServer2 ERROR', e)
+                        }
                         // end works 171014b
 
-
+                        UtilLog.log('post xxxxx save in client/imports/app/obj/utds4/form/utds4-form.component.ts');
 
                         // works but no return 171014c
                         //                      const x = Meteor.call('hbkTestCallToServer', 1, 4);

@@ -161,15 +161,34 @@ export class UtilLog {
     }
 
     public static utdmLog(s:String, severity?:UtdEnum.Severity):void {
-        if (UtilLog.x == null)  {UtilLog.x = 0;} UtilLog.x++; // call counter
+        if (UtilLog.x == null)  {
+            UtilLog.x = 0;
+        }
+        UtilLog.x++; // call counter
 
-        s = 'sev:' + severity + ', s:' + s;
         let cnt = UtilLog.incr();
+        const s2 = cnt + '. ' + UtdEnum.Severity[severity] + ' [' + s + ']';
+
         if (Meteor.isServer) {
-            console.log ("logx: <" + UtilLog.x + "> [" + s + ']');
+            console.log (s2);
         } else {
+            //const errStr = 'logx:: <' + UtilLog.x + "> [" + s + ']';
+
+            if (severity == UtdEnum.Severity.ERROR || severity == UtdEnum.Severity.FATALX)
+            {
+                if (Meteor.isClient) {
+                    eval ("alert ('logx ============================= client error/fatal [" + s2 + "]");
+                } else {
+                    console.log ("logx ============================= server error/fatal [" + s2 + "]");
+                }
+
+            } else if (severity == UtdEnum.Severity.INFO ) {
+                console.log ('logx:' + s2);
+                //eval ("alert ('============================= eval in utd2s.methods.ts must be client infoStr xx [" + UtdEnum.Severity[severity] + '.' + errStr + "]');");
+            }
+
             //eval ("alert ('============================= eval in utd2s.methods.ts must be client');");
-            console.log ('logx:: <' + UtilLog.x + "> [" + s + ']');
+
         }
         //console.log ("thishbk");
     }

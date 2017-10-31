@@ -1,12 +1,8 @@
-import {Utds3} from '../collections/utds3.collection';
-import {Email} from 'meteor/email';
-import {check} from 'meteor/check';
+
 import {Meteor} from 'meteor/meteor';
-import {UtilLog} from "../utlities/UtilLog";
-import {UtilHttp} from "../utlities/UtilHttp";
-import * as http from "http";
-import {Utds42} from "../collections/utds42.collection";
-import {Observable} from "rxjs/Observable";
+import {UtilLog} from "../../both/utlities/UtilLog";
+import {UtilHttp} from "../../both/utlities/UtilHttp";
+import {Utds42} from "../../both/collections/utds42.collection";
 
 // function getContactEmail(user:Meteor.User):string {
 //     if (user.emails && user.emails.length)
@@ -91,10 +87,24 @@ function simplefun (s) {
 console.log('simplefun:s ['+s+']');
 }
 
-function localHttpMethodToWrap (host, path) {
-    return UtilHttp.getHtmlTitle(host, path, function x() {
-        //console.log('in xxxxxxxxxxxxxxxxxxxxxxxxxxx');
+function localHttpMethodToWrap (host, path, c) {
+    UtilHttp.getHtmlTitle(host, path, function callback (error, result) {
+        console.log('in xxxxxxxxxxxxxxxxxxxxxxxxxxx');
+        c(null, result);
+
     });
+}
+
+function localHttpMethodToWrap_sleep (host, path, c) {
+
+    setTimeout(c(null, 'donesleeping'), 3000);
+
+
+    // UtilHttp.getHtmlTitle(host, path, function callback (error, result) {
+    //     console.log('in xxxxxxxxxxxxxxxxxxxxxxxxxxx');
+    //     c(null, result);
+    //
+    // });
 }
 
 
@@ -102,51 +112,20 @@ function localHttpMethodToWrap (host, path) {
 // https://guide.meteor.com/methods.html
 
 Meteor.methods({
-    hbkTestCallToServer: function (a, b) { // was inviteUtd3Methodhbkhbk
-        UtilLog.log('in hbkTestCallToServer ======================================== ');
-        UtilLog.log('in  a:' + a);
-        UtilLog.log('in  b:' + b);
-        // getTexthk(){
-        UtilLog.log('in getText=================');
-        // read text from URL location
-
-
-        let xxhbk = null;
-        // hkTestCallBackFromWithinServerCall(  function (resp) {
-        getTestPersonaLoginCredentials('ssss',function (resp) {
-                UtilLog.log ('------------------------ GOT CALLBACK AT LEVEL 1 --------------------------got back resp:' + resp);
-                xxhbk = resp;
-            }
-        );
-
-        //jQuery.
-
-        //$(response).find("title").text();
-
-        //UtilLog.log ('--------------------------got back resp:' + resp);
-
-        //UtilLog.log ('------------------------ MADE IT HERE? 2 ');
-
-
-
-
-
-
-        //return 'hi mom';
-
-    },
-    hbkTestCallToServer2: function(utdId: string, rsvp: string) {
+    hbkTestCallToServer4: function(utdId: string, rsvp: string) {
 
         try {
 
+            // publish once:  https://stackoverflow.com/questions/18821014/meteor-one-time-or-static-publish-without-collection-tracking
+
             if (Meteor.isClient) {
-                UtilLog.log('------------ exiting client in hbkTestCallToServer2');
+                UtilLog.log('------------ exiting client in hbkTestCallToServer4');
                 return;
             } else if (Meteor.isServer) {
-                UtilLog.log('------------ staying with server in hbkTestCallToServer2');
+                //UtilLog.log('------------ staying with server in hbkTestCallToServer4');
 
                 // WORKS ASYNC  UtilLog.log ('======================= wrap2:'+Meteor.wrapAsync(getTestPersonaLoginCredentials)('xxxtttt'));
-                UtilLog.log('wrap2:' + Meteor.wrapAsync(getTestPersonaLoginCredentials)('xxxtttt'));
+                UtilLog.log('=wrap2:' + Meteor.wrapAsync(getTestPersonaLoginCredentials)(utdId));
                 // return wrap('passed in')
 
                 // no work setTimeout(function(){return 'hi steven';}, 5000);
@@ -167,8 +146,14 @@ Meteor.methods({
                 //     .debounce(() => Observable.interval(50))
                 //     .subscribe(todoCount => simplefun(todoCount));
                 //================================
-                const title = Meteor.wrapAsync(localHttpMethodToWrap)('http://nytimes.com', '/');
-                UtilLog.log('======================= title:' + title);
+                const title1 = Meteor.wrapAsync(localHttpMethodToWrap)('http://'+utdId, '/');
+                //const title1 = Meteor.wrapAsync(localHttpMethodToWrap_sleep)('http://'+utdId, '/');
+                const title2 = 'hktesttitle';
+
+                UtilLog.log('======================= title1:' + title1);
+                console.log('======================= title1:' + title1);
+                UtilLog.log('======================= title2:' + title2);
+                console.log('======================= title2:' + title2);
 
 
                 // WRAP TEST OF DB FIND.COUNT
@@ -176,7 +161,7 @@ Meteor.methods({
                 //UtilLog.log ('======================= wrap3:'+Meteor.wrapAsync(synchronousGetTestPersonaLoginCredentials)('xxxtttt'));
                 //UtilLog.log ('======================= wrap3 end');
 
-                return title;
+                return title1;
 
                 //UtilLog.log ('======================= x:'+x);
                 //return x;
@@ -190,7 +175,7 @@ Meteor.methods({
         } catch (e) {
             //UtilLog.logError('==============error1 in hbkTestCallToServer2', e)
 
-            console.log('ERROR1 !!!!!!!!! ==================error2 in hbkTestCallToServer2:' + e.toString())
+            console.log('ERROR1 !!!!!!!!! ==================error2 in hbkTestCallToServer2 [' + e.toString() + ']')
             e.subscribe(function (todoCount) { return simplefun(todoCount); })
             console.log('ERROR2 !!!!!!!!! ==================error2 in hbkTestCallToServer2:' + e.toString())
         }
