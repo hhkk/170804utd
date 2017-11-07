@@ -88,7 +88,7 @@ console.log('simplefun:s ['+s+']');
 }
 
 function localHttpMethodToWrap (host, path, c) {
-    UtilHttp.getHtmlTitle(host, path, function callback (error, result) {
+    UtilHttp.getHtmlTitle('http://'+host, path, function callback (error, result) {
         console.log('in xxxxxxxxxxxxxxxxxxxxxxxxxxx');
         c(null, result);
 
@@ -96,8 +96,8 @@ function localHttpMethodToWrap (host, path, c) {
 }
 
 function localHttpMethodToWrap_sleep (host, path, c) {
-
-    setTimeout(c(null, 'donesleeping'), 3000);
+    //eg host is num ms to pause by
+    setTimeout(c, host, null, 'donesleeping2:' + host);
 
 
     // UtilHttp.getHtmlTitle(host, path, function callback (error, result) {
@@ -146,14 +146,14 @@ Meteor.methods({
                 //     .debounce(() => Observable.interval(50))
                 //     .subscribe(todoCount => simplefun(todoCount));
                 //================================
-                const title1 = Meteor.wrapAsync(localHttpMethodToWrap)('http://'+utdId, '/');
-                //const title1 = Meteor.wrapAsync(localHttpMethodToWrap_sleep)('http://'+utdId, '/');
-                const title2 = 'hktesttitle';
+                //const title1 = Meteor.wrapAsync(localHttpMethodToWrap)('http://'+utdId, '/');
+                const title1 = Meteor.wrapAsync(localHttpMethodToWrap_sleep)(utdId, '/');
+                const title2 = 'hktesttitle2';
 
                 UtilLog.log('======================= title1:' + title1);
-                console.log('======================= title1:' + title1);
+                //console.log('======================= title1:' + title1);
                 UtilLog.log('======================= title2:' + title2);
-                console.log('======================= title2:' + title2);
+                //console.log('======================= title2:' + title2);
 
 
                 // WRAP TEST OF DB FIND.COUNT
@@ -161,7 +161,7 @@ Meteor.methods({
                 //UtilLog.log ('======================= wrap3:'+Meteor.wrapAsync(synchronousGetTestPersonaLoginCredentials)('xxxtttt'));
                 //UtilLog.log ('======================= wrap3 end');
 
-                return title1;
+                return title2;
 
                 //UtilLog.log ('======================= x:'+x);
                 //return x;

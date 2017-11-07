@@ -30,14 +30,17 @@ export class Utds42List implements OnInit, OnDestroy {
     curPage:   Subject<number> = new Subject<number>();
     nameOrder: Subject<number> = new Subject<number>();
     location:  Subject<string> = new Subject<string>();
+    currentSearchString1:  string;
+    currentSearchString:  Subject<string> = new Subject<string>();
     optionsSub: Subscription;
     utdsSize: number = 0;
     autorunSub: Subscription;
     user: Meteor.User;
     imagesSubs: Subscription;
 
-    constructor(private paginationService: PaginationService) {
 
+    constructor(private paginationService: PaginationService) {
+        this.currentSearchString1 = 's1';
     }
 
     ngOnInit() {
@@ -93,6 +96,9 @@ export class Utds42List implements OnInit, OnDestroy {
             this.utdsSize = Counts.get('numberOfUtds');
             this.paginationService.setTotalItems(this.paginationService.defaultId, this.utdsSize);
         });
+
+        this.currentSearchString1 = 's0';
+
     }
 
     removeUtd(utd: Utd42): void {
@@ -100,13 +106,23 @@ export class Utds42List implements OnInit, OnDestroy {
         Utds42.remove(utd._id);
     }
 
-    search(value: string): void {
+
+
+
+
+
+    searchutdbase(searchUtdBaseString: string): void {
+        this.currentSearchString.next(searchUtdBaseString);
+        this.currentSearchString1 = searchUtdBaseString;
+
+        setTimeout(() => { this.currentSearchString1 = searchUtdBaseString+'lllll';}, 2000)
+        setTimeout(() => { alert('hi mom!:'+this.currentSearchString1)}, 4000)
         //UtilLog.utdmLog("lookin good SEARCH !!!!!!!!!!! 1", UtdEnum.Severity.INFO);
         //let a = $location.search();
-        UtilLog.utdmLog(" ================ slookin good SEARCH !!!!!!!!!!! 2:" + value , UtdEnum.Severity.INFO);
+        UtilLog.utdmLog(" ================ slookin good SEARCH !!!!!!!!!!! 2:" + searchUtdBaseString , UtdEnum.Severity.INFO);
 
         this.curPage.next(1);
-        this.location.next(value);
+        this.location.next(searchUtdBaseString);
     }
 
     onPageChanged(page: number): void {

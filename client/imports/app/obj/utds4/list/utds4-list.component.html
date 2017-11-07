@@ -6,12 +6,22 @@
         <!--HBK top half - data entry -->
         <div >
             <!--utds4B hbk obj\utds4\utds4-list.component.html-->
-            aa utds"4"-list.component.html line 7 utds4-listxxx bb
+
+
+
+
+
+
+            aa nameOrder4:[{{this.currentSearchString}}] utds"4"-list.component.html line 7 utds4-listxxx bb
+            <br>
+            currentSearchString1:[{{currentSearchString1}}]
+            <br>
+            this.currentSearchString1:[{{this.currentSearchString1}}]
             <form>
                 cc  By Location: <md-input dividerColor="primary" type="text" #searchtext2 placeholder="Enter Location"></md-input>
 
                 <!-- HBK FilterUtd42! button -->
-                dd FilterUtd42! <button md-button (click)="search(searchtext2.value)">FilterUtd42!</button>
+                dd FilterUtd42! <button color="accent" md-button (click)="searchutdbase(searchtext2.value)">SearchUtdBase!</button>
 
                 ee sort by date:
                 <!--// hbk sort order dropdown -->

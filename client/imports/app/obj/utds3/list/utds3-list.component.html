@@ -28,24 +28,13 @@
             , where: {{utd.location.name}}
             , desc: {{utd.description}}
 
+            {{utd | rsvp:'yes'}} YES, {{utd | rsvp:'maybe'}} MAYBEHK2, {{utd | rsvp:'no'}} NO
+
+
             <button class="remove-utd" md-icon-button *ngIf="isOwner(utd)" (click)="removeUtd(utd)">
                 <md-icon class="md-24">X</md-icon>
             </button>
 
-            <div class="rsvp-container">
-                <div class="rsvps-sum">
-                    <div class="rsvps-amount">{{utd | rsvp:'yes'}}</div>
-                    <div class="rsvps-title">Yes</div>
-                </div>
-                <div class="rsvps-sum">
-                    <div class="rsvps-amount">{{utd | rsvp:'maybe'}}</div>
-                    <div class="rsvps-title">Maybe</div>
-                </div>
-                <div class="rsvps-sum">
-                    <div class="rsvps-amount">{{utd | rsvp:'no'}}</div>
-                    <div class="rsvps-title">No</div>
-                </div>
-            </div>
         </div>
 
         <pagination-controls class="pagination" (pageChange)="onPageChanged($event)"></pagination-controls>
