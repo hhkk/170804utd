@@ -50,7 +50,61 @@ export class Utds4FormComponent implements OnInit {
                     UtilLog.log('pre save in client/imports/app/obj/utds4/form/utds4-form.component.ts:' + this.addForm.value.utdstr);
                     try {
 
-                        this.getTexthk.call(this);
+
+                        let dt = UtilDate.getDateStr(new Date()).toString();
+                        //Utds42.insert(docToInsert);
+
+                        // synch - try
+                        try {
+                            let docToInsert  = {
+                                //datey: dt,
+                                filelineraw: dt + ' ' + this.addForm.value.utdstr,
+                                //texty: this.addForm.value.utdstr,
+                                public: this.addForm.value.public,
+                                owner: Meteor.userId(),
+                                date: dt,
+                                text: this.addForm.value.utdstr,
+                            };
+                            //let docToInsert_jsonString = EJSON.stringify(docToInsert);
+                            let jSONstrngifiedDocToInsert = JSON.stringify(docToInsert);
+
+                            // Meteor.call('hbkTestCallToServer4', 'utdidhbk', 'rsvphbk', (error, result) => {
+                            Meteor.call('hbkInsertDocThenUpdateWithTitleForURL', this.addForm.value.utdstr, jSONstrngifiedDocToInsert, function (error, result)  {
+                                console.log('========================== in callback from hbkTestCallToServer4');
+                                if (error) {
+                                    alert ('ERROR in asynchHttpTitleGetWrapper:' + error);
+                                }
+                                else if (result) {
+                                    alert ('NONERROR in asynchHttpTitleGetWrapper got back result:'+result);
+                                }
+                                else {
+                                    alert ('NEITHER error nor result');
+                                }
+
+                            });
+
+                        } catch(e) {
+                            console.log ('caught error: eeeeeeeeeeeeeeeeeefffffff');
+                            UtilLog.logError('hbkTestCallToServer2 ERROR', e)
+                            alert('error1 in save');
+
+                        }
+                        // end works 171014b
+
+                        UtilLog.log('post xxxxx save in client/imports/app/obj/utds4/form/utds4-form.component.ts');
+
+
+
+
+                        UtilLog.log('pre xxxxx save in client/imports/app/obj/utds4/form/utds4-form.component.ts');
+
+
+                        // works but no return 171014c
+                        //                      const x = Meteor.call('hbkTestCallToServer', 1, 4);
+                        // end works but no return 171014c
+
+
+                        //this.getTexthk.call(this);
 
                         //alert('pre call');
                         //Meteor.call('hbkTestCallToServer', this);
@@ -87,33 +141,6 @@ export class Utds4FormComponent implements OnInit {
                         // });
                         // end works 171014b
 
-                        UtilLog.log('pre xxxxx save in client/imports/app/obj/utds4/form/utds4-form.component.ts');
-
-                        // synch - try
-                        try {
-                            // Meteor.call('hbkTestCallToServer4', 'utdidhbk', 'rsvphbk', (error, result) => {
-                            Meteor.call('hbkTestCallToServer4', this.addForm.value.utdstr, 'rsvphbk', function (error, result)  {
-                                console.log('========================== in callback from hbkTestCallToServer4');
-                                if (error)
-                                    alert ('error2:'+error);
-                                if (result)
-                                    alert ('result2:'+result);
-                                if (!error &&  !result)
-                                    alert ('2neither error nor result');
-
-                            });
-
-                        } catch(e) {
-                            console.log ('eeeeeeeeeeeeeeeeeefffffff');
-                            UtilLog.logError('hbkTestCallToServer2 ERROR', e)
-                        }
-                        // end works 171014b
-
-                        UtilLog.log('post xxxxx save in client/imports/app/obj/utds4/form/utds4-form.component.ts');
-
-                        // works but no return 171014c
-                        //                      const x = Meteor.call('hbkTestCallToServer', 1, 4);
-                        // end works but no return 171014c
 
 
 
@@ -121,20 +148,11 @@ export class Utds4FormComponent implements OnInit {
                         //alert('post call x:' + x);
 
 
-                        let dt = UtilDate.getDateStr(new Date()).toString();
-                        Utds42.insert({
-                            //datey: dt,
-                            filelineraw: dt + ' ' + this.addForm.value.utdstr,
-                            //texty: this.addForm.value.utdstr,
-                            public: this.addForm.value.public,
-                            owner: Meteor.userId(),
-                            date: dt,
-                            text: this.addForm.value.utdstr,
-                        });
+
                     } catch (err) {
                         console.log(err.stack);
                         console.log(err.toString());
-                        alert('error in save');
+                        alert('error2 in save');
                     }
                 } else {
                     alert ('invalid form');

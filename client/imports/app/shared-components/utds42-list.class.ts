@@ -116,7 +116,7 @@ export class Utds42List implements OnInit, OnDestroy {
         this.currentSearchString1 = searchUtdBaseString;
 
         setTimeout(() => { this.currentSearchString1 = searchUtdBaseString+'lllll';}, 2000)
-        setTimeout(() => { alert('hi mom!:'+this.currentSearchString1)}, 4000)
+        //setTimeout(() => { alert('hi mom!:'+this.currentSearchString1)}, 4000)
         //UtilLog.utdmLog("lookin good SEARCH !!!!!!!!!!! 1", UtdEnum.Severity.INFO);
         //let a = $location.search();
         UtilLog.utdmLog(" ================ slookin good SEARCH !!!!!!!!!!! 2:" + searchUtdBaseString , UtdEnum.Severity.INFO);

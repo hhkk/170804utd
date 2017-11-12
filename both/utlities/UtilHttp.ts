@@ -26,7 +26,9 @@ export class UtilHttp {
 
         //callback ('hkdone');
 
-        UtilLog.log('in getHtml------------------------------------------------');
+        host = 'http://' + host;
+
+        UtilLog.log('in getHtml-- host ['+ host +']');
 
 
         try {
@@ -38,9 +40,9 @@ export class UtilHttp {
             } catch (e) {
                 UtilLog.logError('11111a err', e);
             }
-            //UtilLog.log('11111');
+            UtilLog.log('11111');
             let result2 = JSON.stringify(result);
-           // UtilLog.log('22222');
+            UtilLog.log('22222');
             let title = null;
             try {
                 title = result2.match(/<title[^>]*>([^<]+)<\/title>/)[1];
