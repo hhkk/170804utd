@@ -22,138 +22,138 @@ import {UtdEnum} from "../../../../../../both/utlities/UtdEnum";
 console.log ('hbkhbk in client utds3-details.component.ts');
 
 @Component({
-  selector: 'utd-detailsxxcomponentselector',
-  template,
-  styles: [ style ]
+    selector: 'utd-detailsxxcomponentselector',
+    template,
+    styles: [ style ]
 })
 @InjectUser('user')
 export class Utd3DetailsComponent implements OnInit, OnDestroy {
-  utdId: string;
-  paramsSub: Subscription;
-  utd: Utd3;
-  utdSub: Subscription;
-  users: Observable<User>;
-  uninvitedSub: Subscription;
-  user: Meteor.User;
-  // Default center Palo Alto coordinates.
-  centerLat: number = 37.4292;
-  centerLng: number = -122.1381;
+    utdId: string;
+    paramsSub: Subscription;
+    utd: Utd3;
+    utdSub: Subscription;
+    users: Observable<User>;
+    uninvitedSub: Subscription;
+    user: Meteor.User;
+    // Default center Palo Alto coordinates.
+    centerLat: number = 37.4292;
+    centerLng: number = -122.1381;
 
-  constructor(
-    private route: ActivatedRoute
-  ) {}
+    constructor(
+        private route: ActivatedRoute
+    ) {}
 
-  ngOnInit() {
-    this.paramsSub = this.route.params
-      .map(params => params['utdId'])
-      .subscribe(utdId => {
-        this.utdId = utdId;
-        
-        if (this.utdSub) {
-          this.utdSub.unsubscribe();
+    ngOnInit() {
+        this.paramsSub = this.route.params
+            .map(params => params['utdId'])
+            .subscribe(utdId => {
+                this.utdId = utdId;
+
+                if (this.utdSub) {
+                    this.utdSub.unsubscribe();
+                }
+
+                this.utdSub = MeteorObservable.subscribe('indivUtdhbkpubname', this.utdId).subscribe(() => {
+                    console.log('hbkhbk in subscribe utd3pub');
+                    MeteorObservable.autorun().subscribe(() => {
+                        this.utd = Utds3.findOne(this.utdId);
+                        this.getUsers(this.utd);
+                    });
+                });
+
+                if (this.uninvitedSub) {
+                    this.uninvitedSub.unsubscribe();
+                }
+
+                this.uninvitedSub = MeteorObservable.subscribe('uninvitedUtd3', this.utdId).subscribe(() => {
+                    this.getUsers(this.utd);
+                });
+            });
+    }
+
+    getUsers(utd: Utd3) {
+        if (utd) {
+            this.users = Users.find({
+                _id: {
+                    $nin: utd.invited || [],
+                    $ne: Meteor.userId()
+                }
+            }).zone();
         }
+    }
 
-          this.utdSub = MeteorObservable.subscribe('indivUtdhbkpubname', this.utdId).subscribe(() => {
-          console.log('hbkhbk in subscribe utd3pub');
-          MeteorObservable.autorun().subscribe(() => {
-            this.utd = Utds3.findOne(this.utdId);
-            this.getUsers(this.utd);
-          });
+    saveUtd3() {
+        if (!Meteor.userId()) {
+            alert('Please log in to change this utd');
+            return;
+        }
+        //UtilLog.utdmLog("in saveUtd3 hbk!!! sunday", UtdEnum.Severity.INFO);
+        console.log ("in saveUtd3 hbk!!!!!!!!!!!!!!!!!!!! sunday");
+        Utds3.update(this.utd._id, {
+            $set: {
+                name: this.utd.name,
+                description: this.utd.description,
+                location: this.utd.location,
+                public: this.utd.public
+            }
         });
+    }
 
-         if (this.uninvitedSub) {
-           this.uninvitedSub.unsubscribe();
-         }
+    inviteUtd(user: Meteor.User) {
+        MeteorObservable.call('inviteUtd3Methodhbkhbk', this.utd._id, user._id).subscribe(() => {
+            alert('User successfully invited to this utd3.');
+        }, (error) => {
+            alert(`Failed utd invite to invite due to ${error}`);
+        });
+    }
 
-         this.uninvitedSub = MeteorObservable.subscribe('uninvitedUtd3', this.utdId).subscribe(() => {
-           this.getUsers(this.utd);
-         });
-      });
-  }
+    replyUtd(rsvp: string) {
+        MeteorObservable.call('replyUtd3x', this.utd._id, rsvp).subscribe(() => {
+            alert('You successfully replied to this utd3.');
+        }, (error) => {
+            alert(`Failed to reply due to ${error}`);
+        });
+    }
 
-  getUsers(utd: Utd3) {
-    if (utd) {
-      this.users = Users.find({
-        _id: {
-          $nin: utd.invited || [],
-          $ne: Meteor.userId()
+    get isOwner(): boolean {
+        return this.utd && this.user && this.user._id === this.utd.owner;
+    }
+
+    get isPublic(): boolean {
+        return this.utd && this.utd.public;
+    }
+
+    get isInvited(): boolean {
+        if (this.utd && this.user) {
+            const invited = this.utd.invited || [];
+
+            return invited.indexOf(this.user._id) !== -1;
         }
-      }).zone();
-    }
-  }
 
-  saveUtd3() {
-    if (!Meteor.userId()) {
-      alert('Please log in to change this utd');
-      return;
-    }
-    //UtilLog.utdmLog("in saveUtd3 hbk!!! sunday", UtdEnum.Severity.INFO);
-    console.log ("in saveUtd3 hbk!!!!!!!!!!!!!!!!!!!! sunday");
-    Utds3.update(this.utd._id, {
-      $set: {
-        name: this.utd.name,
-        description: this.utd.description,
-        location: this.utd.location,
-        public: this.utd.public
-      }
-    });
-  }
-
-  inviteUtd(user: Meteor.User) {
-    MeteorObservable.call('inviteUtd3Methodhbkhbk', this.utd._id, user._id).subscribe(() => {
-      alert('User successfully invited to this utd3.');
-    }, (error) => {
-      alert(`Failed utd invite to invite due to ${error}`);
-    });
-  }
-
-  replyUtd(rsvp: string) {
-    MeteorObservable.call('replyUtd3x', this.utd._id, rsvp).subscribe(() => {
-      alert('You successfully replied to this utd3.');
-    }, (error) => {
-      alert(`Failed to reply due to ${error}`);
-    });
-  }
-
-  get isOwner(): boolean {
-    return this.utd && this.user && this.user._id === this.utd.owner;
-  }
-
-  get isPublic(): boolean {
-    return this.utd && this.utd.public;
-  }
-
-  get isInvited(): boolean {
-    if (this.utd && this.user) {
-      const invited = this.utd.invited || [];
-
-      return invited.indexOf(this.user._id) !== -1;
+        return false;
     }
 
-    return false;
-  }
 
+    get lat(): number {
+        return this.utd && this.utd.location.lat;
+    }
 
-  get lat(): number {
-    return this.utd && this.utd.location.lat;
-  }
+    get lng(): number {
+        return this.utd && this.utd.location.lng;
+    }
 
-  get lng(): number {
-    return this.utd && this.utd.location.lng;
-  }
+    mapClicked($event: MouseEvent) {
+        this.utd.location.lat = $event.coords.lat;
+        this.utd.location.lng = $event.coords.lng;
+    }
 
-  mapClicked($event: MouseEvent) {
-    this.utd.location.lat = $event.coords.lat;
-    this.utd.location.lng = $event.coords.lng;
-  }
-
-  ngOnDestroy() {
-    //alert('exiting 1 utd3-details.component.ts');
-    this.paramsSub.unsubscribe();
-    //alert('exiting 2 utd3-details.component.ts');
-    this.utdSub.unsubscribe();
-    //alert('exiting 3 utd3-details.component.ts');
-    this.uninvitedSub.unsubscribe();
-    //alert('exiting 4 utd3-details.component.ts');
-  }
+    ngOnDestroy() {
+        //alert('exiting 1 utd3-details.component.ts');
+        this.paramsSub.unsubscribe();
+        //alert('exiting 2 utd3-details.component.ts');
+        this.utdSub.unsubscribe();
+        //alert('exiting 3 utd3-details.component.ts');
+        this.uninvitedSub.unsubscribe();
+        //alert('exiting 4 utd3-details.component.ts');
+    }
 }

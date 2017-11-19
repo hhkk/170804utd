@@ -11,6 +11,9 @@ import template from './utds4-form.component.html';
 import style from './utds4-form.component.scss';
 import {MeteorObservable} from "meteor-rxjs";
 import user = Meteor.user;
+// import {Utds42List} from "../../../shared-components/utds42-list.class";
+// import { Utds4ListComponent } from "../list/utds4-list.component";
+// import {PaginationService} from "ng2-pagination";
 
 @Component({
     selector: 'utds-formx2634',
@@ -35,13 +38,24 @@ export class Utds4FormComponent implements OnInit {
     }
 
 
-    addUtd(): void {
+    addUtd(addUtdStr): void {
         //UtilLog.utdmLog('in utds4 utdsxx2-form.component.ts', UtilLog.SEVERITYy.INFO);
-        UtilLog.utdmLog('in utds4-form.component.ts.addUtd', UtdEnum.Severity.INFO);
+        UtilLog.utdmLog('in addUtd utds4-form.component.ts.addUtd:' + addUtdStr, UtdEnum.Severity.INFO);
         if (!Meteor.userId()) {
             alert('Please log in to add a utd');
             return;
         }
+
+        // alert('in add looking across to list window.xxxglobalUtds42List.constructedTime:' + window.xxxglobalUtds42List.constructedTime);
+        //alert('in add BEFORE looking across to list window.xxxglobalUtds42List.searchutdbase:');
+        let x = window.xxxglobalUtds42List;
+        // WORKS - OLD WAY - x.searchutdbase(this.addForm.value.utdstr);  // GLOBALUSAGE
+        x.searchutdbase(this.addForm.value.utdstr);  // GLOBALUSAGE
+        //x.searchutdbase(addUtdStr);  // GLOBALUSAGE
+        //alert('in add DONE!!! looking across to list window.xxxglobalUtds42List.constructedTime:' + window.xxxglobalUtds42List.constructedTime);
+
+        //let x = new Utds42List(new PaginationService());
+        //x.searchutdbase('bkon');
 
         if (this.addForm.valid) {
             let i;
@@ -78,7 +92,13 @@ export class Utds4FormComponent implements OnInit {
                                     alert ('NONERROR in asynchHttpTitleGetWrapper got back result:'+result);
                                 }
                                 else {
-                                    alert ('NEITHER error nor result');
+                                    console.log ('====================== docToInsert.text1:'+docToInsert.text);
+                                    UtilLog.log ('====================== docToInsert.text2:'+docToInsert.text);
+                                    //let Utds4ListComponent.search
+
+                                    //Utds42List x = new Utds42List();
+                                    //x.searchutdbase (docToInsert.text)
+                                    //alert ('NEITHER error nor result1:' + docToInsert.text);
                                 }
 
                             });

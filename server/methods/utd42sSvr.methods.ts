@@ -102,7 +102,7 @@ function asynchHttpTitleGetWrapper (docToInsert, c) {
             UtilLog.log ('NONERROR in asynchHttpTitleGetWrapper got back result:'+result);
         }
         else {
-            UtilLog.log ('NEITHER error nor result');
+            UtilLog.log ('NEITHER error nor resultA');
         }
 
         c (null, result);
@@ -190,12 +190,12 @@ Meteor.methods({
 
                             docToInsert.text = 'hihkhkhk ['+ result + '] ' + docToInsert.text;
                             let h = Utds42.update({_id: saveId}, docToInsert);
-                            UtilLog.log('========================= h:' + h);
+                            //UtilLog.log('========================= h:' + h);
 
                             UtilLog.log ('NONERROR in asynchHttpTitleGetWrapper got back result:'+result);
                         }
                         else {
-                            UtilLog.log ('NEITHER error nor result');
+                            UtilLog.log ('NEITHER error nor result B');
                         }
                     }
                 );

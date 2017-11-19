@@ -18,7 +18,7 @@ Meteor.publish('utdbase', function(options: Options, location?: string) {
         //if ( !locationTruncated || !locationTruncated.length)
         {
 
-            //UtilLog.utdmLog("~~~~~~~~~~~~~~~~~ hbkhbk in publish (utdbase) LOCATION 2 NULL OR NOT NULL ["+locationTruncated+"]", UtdEnum.Severity.INFO);
+            UtilLog.log("~~~~~~~~~~~~~~~~~ hbkhbk in publish (utdbase) LOCATION 2 NULL OR NOT NULL ["+locationTruncated+"]");
             // this SERVER side utdbase (42) query
             const searchArrayRegEx = buildQuery.call(this, null, locationTruncated);
 
@@ -37,6 +37,10 @@ Meteor.publish('utdbase', function(options: Options, location?: string) {
 
 
 );
+
+Meteor.publish('userDatahbk', function () {
+    return Meteor.users.find();
+});
 
 // const MyCollection = MongoObservable.Collection("myCollection");
 //
