@@ -31,159 +31,227 @@ export class Utds4FormComponent implements OnInit {
     ) {}
 
     ngOnInit() {
-        this.addForm = this.formBuilder.group({
-            utdstr: ['', Validators.required],
-            public: [false]
-        });
+        //alert('in Utds4FormComponent.ngOnInit()');
+        this.addForm = this.formBuilder.group(
+            {
+                utdstr: ['', Validators.required],
+                public: [false],
+                save2: [true]
+            });
     }
 
 
-    addUtd(addUtdStr): void {
+
+
+
+
+    //addUtd(addUtdStr, saveUtdCheckbox, publicUtdCheckbox): void {
+    addUtd(addUtdStr, saveHtmlHolder, publicHtmlHolder): void {
         //UtilLog.utdmLog('in utds4 utdsxx2-form.component.ts', UtilLog.SEVERITYy.INFO);
-        UtilLog.utdmLog('in addUtd utds4-form.component.ts.addUtd:' + addUtdStr, UtdEnum.Severity.INFO);
-        if (!Meteor.userId()) {
-            alert('Please log in to add a utd');
-            return;
-        }
-
-        // alert('in add looking across to list window.xxxglobalUtds42List.constructedTime:' + window.xxxglobalUtds42List.constructedTime);
-        //alert('in add BEFORE looking across to list window.xxxglobalUtds42List.searchutdbase:');
+        //alert ('in addUtd utds4-form.component.ts.addUtd:' + addUtdStr);
+//         UtilLog.utdmLog('========= in addUtd saveHtmlHolder:' + saveHtmlHolder, UtdEnum.Severity.INFO);
+//
+//         try {
+//             UtilLog.utdmLog('========= in addUtd saveHtmlHolder._checked:' + saveHtmlHolder._checked, UtdEnum.Severity.INFO);
+//
+//         } catch (error) {
+//             UtilLog.logError('in addUtd save retrieve', error);
+//         }
+//         UtilLog.utdmLog('in addUtd utds4-form.component.ts.addUtd:' + addUtdStr, UtdEnum.Severity.INFO);
+//         if (!Meteor.userId()) {
+//             alert('Please log in to add a utd');
+//             return;
+//         }
+//
+//         //let saveUtdCheckbox = this.addForm.value.saveUtdCheckbox;
+//         // let publicUtdCheckbox = this.addForm.value.publicUtdCheckbox;
+//         // UtilLog.utdmLog('in addUtd saveUtdCheckbox:' + saveUtdCheckbox, UtilLog.SEVERITYy.INFO);
+//         // UtilLog.utdmLog('in addUtd publicUtdCheckbox:' + publicUtdCheckbox, UtilLog.SEVERITYy.INFO);
+//
+//
+//         // alert('in add looking across to list window.xxxglobalUtds42List.constructedTime:' + window.xxxglobalUtds42List.constructedTime);
+//         //alert('in add BEFORE looking across to list window.xxxglobalUtds42List.searchutdbase:');
+//
+//
         let x = window.xxxglobalUtds42List;
-        // WORKS - OLD WAY - x.searchutdbase(this.addForm.value.utdstr);  // GLOBALUSAGE
-        x.searchutdbase(this.addForm.value.utdstr);  // GLOBALUSAGE
-        //x.searchutdbase(addUtdStr);  // GLOBALUSAGE
-        //alert('in add DONE!!! looking across to list window.xxxglobalUtds42List.constructedTime:' + window.xxxglobalUtds42List.constructedTime);
-
-        //let x = new Utds42List(new PaginationService());
-        //x.searchutdbase('bkon');
-
-        if (this.addForm.valid) {
-            let i;
-            for (i = 0; i < 1; i++) {
-                if (this.addForm.valid) {
-                    UtilLog.log('pre save in client/imports/app/obj/utds4/form/utds4-form.component.ts:' + this.addForm.value.utdstr);
-                    try {
-
-
-                        let dt = UtilDate.getDateStr(new Date()).toString();
-                        //Utds42.insert(docToInsert);
-
-                        // synch - try
-                        try {
-                            let docToInsert  = {
-                                //datey: dt,
-                                filelineraw: dt + ' ' + this.addForm.value.utdstr,
-                                //texty: this.addForm.value.utdstr,
-                                public: this.addForm.value.public,
-                                owner: Meteor.userId(),
-                                date: dt,
-                                text: this.addForm.value.utdstr,
-                            };
-                            //let docToInsert_jsonString = EJSON.stringify(docToInsert);
-                            let jSONstrngifiedDocToInsert = JSON.stringify(docToInsert);
-
-                            // Meteor.call('hbkTestCallToServer4', 'utdidhbk', 'rsvphbk', (error, result) => {
-                            Meteor.call('hbkInsertDocThenUpdateWithTitleForURL', this.addForm.value.utdstr, jSONstrngifiedDocToInsert, function (error, result)  {
-                                console.log('========================== in callback from hbkTestCallToServer4');
-                                if (error) {
-                                    alert ('ERROR in asynchHttpTitleGetWrapper:' + error);
-                                }
-                                else if (result) {
-                                    alert ('NONERROR in asynchHttpTitleGetWrapper got back result:'+result);
-                                }
-                                else {
-                                    console.log ('====================== docToInsert.text1:'+docToInsert.text);
-                                    UtilLog.log ('====================== docToInsert.text2:'+docToInsert.text);
-                                    //let Utds4ListComponent.search
-
-                                    //Utds42List x = new Utds42List();
-                                    //x.searchutdbase (docToInsert.text)
-                                    //alert ('NEITHER error nor result1:' + docToInsert.text);
-                                }
-
-                            });
-
-                        } catch(e) {
-                            console.log ('caught error: eeeeeeeeeeeeeeeeeefffffff');
-                            UtilLog.logError('hbkTestCallToServer2 ERROR', e)
-                            alert('error1 in save');
-
-                        }
-                        // end works 171014b
-
-                        UtilLog.log('post xxxxx save in client/imports/app/obj/utds4/form/utds4-form.component.ts');
-
-
-
-
-                        UtilLog.log('pre xxxxx save in client/imports/app/obj/utds4/form/utds4-form.component.ts');
-
-
-                        // works but no return 171014c
-                        //                      const x = Meteor.call('hbkTestCallToServer', 1, 4);
-                        // end works but no return 171014c
-
-
-                        //this.getTexthk.call(this);
-
-                        //alert('pre call');
-                        //Meteor.call('hbkTestCallToServer', this);
-
-                        // works 171014
-                        //       MeteorObservable.call('hbkTestCallToServer', Meteor.userId()).subscribe(() => {
-                        //     //MeteorObservable.call('hbkTestCallToServer', this.utd._id, user._id).subscribe(() => {
-                        //         alert('User successfully invited to this utd3.');
-                        //     }, (error) => {
-                        //         alert(`Failed utd invite to invite due to ${error}`);
-                        //     });
-                        // end works 171014
-
-// from https://docs.meteor.com/api/methods.html
-
-                        // synch with no callback I guess
-                        // Synchronous call
-                        // const result = Meteor.call('foo', 1, 2);
-
-
-
-
-
-
-                        // asynch works 171014b
-                        // Meteor.call('hbkTestCallToServer', 1, 6, (error, result) => {
-                        //     if (error)
-                        //         alert ('error:'+error);
-                        //     if (result)
-                        //         alert ('result:'+result);
-                        //     if (!error &&  !result)
-                        //         alert ('neither error nor result');
-                        //
-                        // });
-                        // end works 171014b
-
-
-
-
-
-                        //alert('post call x:' + x);
-
-
-
-                    } catch (err) {
-                        console.log(err.stack);
-                        console.log(err.toString());
-                        alert('error2 in save');
-                    }
-                } else {
-                    alert ('invalid form');
-                }
-                //alert('post save');
-
-            } // for
-
-            this.addForm.reset();
+//         // WORKS - OLD WAY - x.searchutdbase(this.addForm.value.utdstr);  // GLOBALUSAGE
+        x.searchutdbase(addUtdStr);  // NO GLOBALUSAGE
+//
+//         //alert('in add DONE!!! looking across to list window.xxxglobalUtds42List.constructedTime:' + window.xxxglobalUtds42List.constructedTime);
+//
+//         //let x = new Utds42List(new PaginationService());
+//         //x.searchutdbase('bkon');
+//
+        if (saveHtmlHolder._checked && this.addForm.valid)
+        {
+//             //alert('start save');
+//             let i;
+//             for (i = 0; i < 1; i++) {
+//                     UtilLog.log('pre save in client/imports/app/obj/utds4/form/utds4-form.component.ts:' + this.addForm.value.utdstr);
+//                     try {
+//
+//
+                         let dt = UtilDate.getDateStr(new Date()).toString();
+//                         //Utds42.insert(docToInsert);
+//
+//                         if (false)  // hk test way - creatr doc and call server to do insert to DB and to get title
+//                         {
+//                             // synch - try
+//                             try {
+//                                 let docToInsert  = {
+//                                     //datey: dt,
+//                                     filelineraw: dt + ' ' + this.addForm.value.utdstr,
+//                                     //texty: this.addForm.value.utdstr,
+//                                     public: this.addForm.value.public,
+//                                     owner: Meteor.userId(),
+//                                     date: dt,
+//                                     text: this.addForm.value.utdstr,
+//                                 };
+//                                 //let docToInsert_jsonString = EJSON.stringify(docToInsert);
+//                                 let jSONstrngifiedDocToInsert = JSON.stringify(docToInsert);
+//
+//                                 // Meteor.call('hbkTestCallToServer4', 'utdidhbk', 'rsvphbk', (error, result) => {
+//                                 Meteor.call('hbkInsertDocThenUpdateWithTitleForURL', this.addForm.value.utdstr, jSONstrngifiedDocToInsert, function (error, result)  {
+//                                     console.log('========================== in callback from hbkTestCallToServer4');
+//                                     if (error) {
+//                                         alert ('ERROR in asynchHttpTitleGetWrapper:' + error);
+//                                     }
+//                                     else if (result) {
+//                                         alert ('NONERROR in asynchHttpTitleGetWrapper got back result:'+result);
+//                                     }
+//                                     else {
+//                                         console.log ('====================== neither error nor result docToInsert.text:'+docToInsert.text);
+//                                         UtilLog.log ('====================== docToInsert.text2:'+docToInsert.text);
+//
+//                                         saveHtmlHolder._checked = false;
+//                                         //alert ('saved:' + docToInsert.text);
+//                                         //let Utds4ListComponent.search
+//
+//                                         //Utds42List x = new Utds42List();
+//                                         //x.searchutdbase (docToInsert.text)
+//                                         //alert ('NEITHER error nor result1:' + docToInsert.text);
+//                                     }
+//
+//                                 });
+//
+//                             } catch(e) {
+//                                 console.log ('caught error: eeeeeeeeeeeeeeeeeefffffff');
+//                                 UtilLog.logError('hbkTestCallToServer2 ERROR', e)
+//                                 alert('error1 in save - see client console');
+//
+//                             }
+//                         }
+//                         else if (true)// which "way"?
+//                         {
+//                            //saveHtmlHolder._checked = true;
+//
+                            try {
+                                Utds42.insert
+                                (
+                                    {
+                                        //datey: dt,
+                                        filelineraw: dt + ' ' + this.addForm.value.utdstr,
+                                        //texty: this.addForm.value.utdstr,
+                                        public: this.addForm.value.public,
+                                        owner: Meteor.userId(),
+                                        date: dt,
+                                        text: this.addForm.value.utdstr,
+                                        owner: Meteor.userId()
+                                    }
+                                    // , () => {
+                                    //     alert('in callback from utds42 insert');
+                                    // }
+                                );
+                            } catch (err) {
+                                console.log(err.stack);
+                                console.log(err.toString());
+                                alert('error in save');
+                            }
+//                         }
+//                         else // playpen sandbox testbin
+//                         {
+//                             this.addForm.value.save2 = true;
+//                             alert('set this.addForm.value.save = true');
+//
+//                         }
+//                         // end works 171014b
+//
+//                         UtilLog.log('post x xxxx save in client/imports/app/obj/utds4/form/utds4-form.component.ts');
+//
+//
+//
+//
+//                         UtilLog.log('pre xxxxx save in client/imports/app/obj/utds4/form/utds4-form.component.ts');
+//
+//
+//                         // works but no return 171014c
+//                         //                      const x = Meteor.call('hbkTestCallToServer', 1, 4);
+//                         // end works but no return 171014c
+//
+//
+//                         //this.getTexthk.call(this);
+//
+//                         //alert('pre call');
+//                         //Meteor.call('hbkTestCallToServer', this);
+//
+//                         // works 171014
+//                         //       MeteorObservable.call('hbkTestCallToServer', Meteor.userId()).subscribe(() => {
+//                         //     //MeteorObservable.call('hbkTestCallToServer', this.utd._id, user._id).subscribe(() => {
+//                         //         alert('User successfully invited to this utd3.');
+//                         //     }, (error) => {
+//                         //         alert(`Failed utd invite to invite due to ${error}`);
+//                         //     });
+//                         // end works 171014
+//
+// // from https://docs.meteor.com/api/methods.html
+//
+//                         // synch with no callback I guess
+//                         // Synchronous call
+//                         // const result = Meteor.call('foo', 1, 2);
+//
+//
+//
+//
+//
+//
+//                         // asynch works 171014b
+//                         // Meteor.call('hbkTestCallToServer', 1, 6, (error, result) => {
+//                         //     if (error)
+//                         //         alert ('error:'+error);
+//                         //     if (result)
+//                         //         alert ('result:'+result);
+//                         //     if (!error &&  !result)
+//                         //         alert ('neither error nor result');
+//                         //
+//                         // });
+//                         // end works 171014b
+//
+//
+//
+//
+//
+//                         //alert('post call x:' + x);
+//
+//
+//
+//                     } catch (err) {
+//                         console.log(err.stack);
+//                         console.log(err.toString());
+//                         alert('error2 in save');
+//                     }
+//                 } else {
+//                     alert ('invalid form');
+//                 }
+//                 //alert('post save');
+//
+//             } // for
+//
+//             this.addForm.reset();
+//         } else {
+//             // no save
+//         }
         }
-    }
+    } // end addutd fn
 
 
     //

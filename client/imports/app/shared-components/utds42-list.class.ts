@@ -58,6 +58,7 @@ export class Utds42List implements OnInit, OnDestroy {
     ngOnInit() {
         this.imagesSubs = MeteorObservable.subscribe('images').subscribe();
 
+        // http://reactivex.io/rxjs/class/es6/Observable.js~Observable.html#static-method-combineLatest
         this.optionsSub = Observable.combineLatest(
             this.pageSize,
             this.curPage,
@@ -67,8 +68,11 @@ export class Utds42List implements OnInit, OnDestroy {
             const options: Options = {
                 limit: pageSize as number,
                 skip: ((curPage as number) - 1) * (pageSize as number),
-                sort: {filelineraw: nameOrder as number}
+                // sort: {filelineraw: nameOrder as number}
+                sort: {text: 1}
             };
+
+            //alert('in .sub %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%');
 
             this.paginationService.setCurrentPage(this.paginationService.defaultId, curPage as number);
 
@@ -85,7 +89,7 @@ export class Utds42List implements OnInit, OnDestroy {
                 this.utdsxx2_42 = Utds42.find({}, {
                     sort: {
                         // works text: 1
-                        text: 1
+                        filelineraw: 1
                         // works filelineraw: -1
                     }
                 }).zone();
@@ -153,7 +157,7 @@ export class Utds42List implements OnInit, OnDestroy {
 
         this.currentSearchString1 = searchUtdBaseString;
 
-        UtilLog.utdmLog(" ================ in searchutdbase  :" + searchUtdBaseString , UtdEnum.Severity.INFO);
+        UtilLog.utdmLog(" in searchutdbase  :" + searchUtdBaseString , UtdEnum.Severity.INFO);
 
         this.currentSearchString.next(searchUtdBaseString);
         this.currentSearchString1 = searchUtdBaseString;
@@ -162,7 +166,7 @@ export class Utds42List implements OnInit, OnDestroy {
         //setTimeout(() => { alert('hi mom!:'+this.currentSearchString1)}, 4000)
         //UtilLog.utdmLog("lookin good SEARCH !!!!!!!!!!! 1", UtdEnum.Severity.INFO);
         //let a = $location.search();
-        UtilLog.utdmLog(" ================ slookin good SEARCH !!!!!!!!!!! 2:" + searchUtdBaseString , UtdEnum.Severity.INFO);
+        UtilLog.utdmLog(" slookin good SEARCH !!!!!!!!!!! 2:" + searchUtdBaseString , UtdEnum.Severity.INFO);
 
         this.curPage.next(1);
         this.location.next(searchUtdBaseString);

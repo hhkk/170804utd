@@ -2,13 +2,14 @@
     <div class="container-background">
         <div class="form-content">
             <div class="form-center">
-                <form *ngIf="user" [formGroup]="addForm" (ngSubmit)="addUtd(utdstrhtmlholder.value);">
+                    <form *ngIf="user" [formGroup]="addForm" (ngSubmit)="addUtd(utdstrhtmlholder.value,     );">
                     <div style="display: table-row">
                         <div class="form-inputs">
                             <!--hiMom2!!!!!  \obj\utds4\utds4-form.component.html-->
                             <button color="accent" md-raised-button type="submit">AddUTD42!</button>
-                            <md-input dividerColor="accent" #utdstrhtmlholder formControlName="utdstr" placeholder="utdstr"></md-input>
-                            <md-checkbox formControlName="public">Public </md-checkbox>
+                            <md-input dividerColor="accent" #utdstrhtmlholder formControlName="utdstr" placeholder="utdstr2"></md-input>
+                            <md-checkbox #saveHtmlHolder   formControlName="save2">  Savehbk   </md-checkbox>
+                            <md-checkbox #publicHtmlHolder formControlName="public">Publichbk </md-checkbox>
                         </div>
                     </div>
                 </form>

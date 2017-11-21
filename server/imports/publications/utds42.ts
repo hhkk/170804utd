@@ -22,7 +22,7 @@ Meteor.publish('utdbase', function(options: Options, location?: string) {
             // this SERVER side utdbase (42) query
             const searchArrayRegEx = buildQuery.call(this, null, locationTruncated);
 
-            Counts.publish(this, 'numberOfUtds', Utds42.collection.find(searchArrayRegEx, {sort : { filelineraw : -1 }}), { noReady: true, sort : { filelineraw : -1 } });
+            Counts.publish(this, 'numberOfUtds', Utds42.collection.find(searchArrayRegEx, {sort : { filelineraw : 1 }}), { noReady: true, sort : { filelineraw : -1 } });
             //Counts.publish(this, 'numberOfUtds', Utds42.collection.find(searchArrayRegEx), { noReady: true , sort : { filelineraw : '-1' }});
 
             return Utds42.find(searchArrayRegEx, options);
