@@ -23,12 +23,16 @@ import user = Meteor.user;
 @InjectUser("user")
 export class Utds4FormComponent implements OnInit {
     addForm: FormGroup;
-
+    setSearchStringForm: FormGroup;
+    hkbigstring1: string
     images: string[] = [];
 
     constructor(
         private formBuilder: FormBuilder
-    ) {}
+    ) {
+        //alert ('in Utds4FormComponent.construct');
+        this.hkbigstring1 = 'hkbigstring1b';
+    }
 
     ngOnInit() {
         //alert('in Utds4FormComponent.ngOnInit()');
@@ -38,11 +42,29 @@ export class Utds4FormComponent implements OnInit {
                 public: [false],
                 save2: [true]
             });
+
+
+
+        let xx = this.addForm.getRawValue();
+        xx.utdstr = 'sdsdfsdfsdfsdf';
+
+
+        //works this.addForm.setValue({utdstr: 'utdstr_yo', public: false, save2: true});
+        this.addForm.setValue(xx);
+        // this.addForm.setValue({utdstr: 'utdstr_yo', last: 'Drew'});
+
+        //alert('utdstr:' + this.addForm.getRawValue().utdstr);
+
+        this.setSearchStringForm = this.formBuilder.group(
+            {
+                setsrchhbk: [true]
+            });
     }
 
 
-
-
+    setSrch(srchStr): void {
+        alert('in setSrch srchStr:' + srchStr);
+    }
 
 
     //addUtd(addUtdStr, saveUtdCheckbox, publicUtdCheckbox): void {
@@ -91,7 +113,7 @@ export class Utds4FormComponent implements OnInit {
 //                     try {
 //
 //
-                         let dt = UtilDate.getDateStr(new Date()).toString();
+            let dt = UtilDate.getDateStr(new Date()).toString();
 //                         //Utds42.insert(docToInsert);
 //
 //                         if (false)  // hk test way - creatr doc and call server to do insert to DB and to get title
@@ -145,28 +167,28 @@ export class Utds4FormComponent implements OnInit {
 //                         {
 //                            //saveHtmlHolder._checked = true;
 //
-                            try {
-                                Utds42.insert
-                                (
-                                    {
-                                        //datey: dt,
-                                        filelineraw: dt + ' ' + this.addForm.value.utdstr,
-                                        //texty: this.addForm.value.utdstr,
-                                        public: this.addForm.value.public,
-                                        owner: Meteor.userId(),
-                                        date: dt,
-                                        text: this.addForm.value.utdstr,
-                                        owner: Meteor.userId()
-                                    }
-                                    // , () => {
-                                    //     alert('in callback from utds42 insert');
-                                    // }
-                                );
-                            } catch (err) {
-                                console.log(err.stack);
-                                console.log(err.toString());
-                                alert('error in save');
-                            }
+            try {
+                Utds42.insert
+                (
+                    {
+                        //datey: dt,
+                        filelineraw: dt + ' ' + this.addForm.value.utdstr,
+                        //texty: this.addForm.value.utdstr,
+                        public: this.addForm.value.public,
+                        owner: Meteor.userId(),
+                        date: dt,
+                        text: this.addForm.value.utdstr,
+                        owner: Meteor.userId()
+                    }
+                    // , () => {
+                    //     alert('in callback from utds42 insert');
+                    // }
+                );
+            } catch (err) {
+                console.log(err.stack);
+                console.log(err.toString());
+                alert('error in save');
+            }
 //                         }
 //                         else // playpen sandbox testbin
 //                         {

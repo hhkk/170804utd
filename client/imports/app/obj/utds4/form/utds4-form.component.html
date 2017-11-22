@@ -1,8 +1,16 @@
+
 <div class="form-container">
+    ccccc
     <div class="container-background">
+    dddd: sss5
+<br>
+        hkbigstring1 {{hkbigstring1}}
         <div class="form-content">
             <div class="form-center">
-                    <form *ngIf="user" [formGroup]="addForm" (ngSubmit)="addUtd(utdstrhtmlholder.value, saveHtmlHolder);">
+                gggg2
+                <br>
+                {{hkbigstring1}}
+                <form *ngIf="user" [formGroup]="addForm" (ngSubmit)="addUtd(utdstrhtmlholder.value, saveHtmlHolder);">
                     <div style="display: table-row">
                         <div class="form-inputs">
                             <!--hiMom2!!!!!  \obj\utds4\utds4-form.component.html-->
@@ -13,6 +21,18 @@
                         </div>
                     </div>
                 </form>
+
+                <form *ngIf="user" [formGroup]="setSearchStringForm" (ngSubmit)="setSrch(htmlholderSetSrch.value)">
+                    <div style="display: table-row">
+                        <div class="form-inputs">
+                            <button color="accent" md-raised-button type="submit">setSrch!</button>
+                            <md-input dividerColor="accent" #htmlholderSetSrch formControlName="setsrchhbk" placeholder="setSrch"></md-input>
+                        </div>
+                    </div>
+                </form>
+
+
+
                 <div *ngIf="!user">
                     Please login in order to create new utds!
                 </div>
