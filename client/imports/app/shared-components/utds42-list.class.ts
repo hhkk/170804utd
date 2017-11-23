@@ -11,6 +11,7 @@ import {InjectUser} from "angular2-meteor-accounts-ui";
 import { UtilLog } from "../../../../both/utlities/UtilLog";
 import { UtdEnum } from "../../../../both/utlities/UtdEnum";
 import {Utd42} from "../../../../both/models/utd42.model";
+import {FormControl, FormGroup} from "@angular/forms";
 //import {Utds4FormComponent} from "../obj/utds4/form/utds4-form.component";
 
 //import {Utds4} from "../../../../both/collections/utds4.collection";
@@ -42,6 +43,7 @@ export class Utds42List implements OnInit, OnDestroy {
     autorunSub: Subscription;
     user: Meteor.User;
     imagesSubs: Subscription;
+    searchFormgroup: FormGroup;
 
     //1
     // @Input() xxxx: Utds4FormComponent;   // hbkhbk
@@ -56,6 +58,15 @@ export class Utds42List implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
+
+
+        this.searchFormgroup = new FormGroup({
+            trueSearchString: new FormControl()
+        });
+
+        let xx = this.searchFormgroup.getRawValue();
+        xx.trueSearchString = 'trueSearchStringhk';
+
         this.imagesSubs = MeteorObservable.subscribe('images').subscribe();
 
         // http://reactivex.io/rxjs/class/es6/Observable.js~Observable.html#static-method-combineLatest
@@ -150,6 +161,26 @@ export class Utds42List implements OnInit, OnDestroy {
 
 
     searchutdbase(searchUtdBaseString: string): void {
+
+
+
+
+
+
+
+
+        let xx = this.searchFormgroup.getRawValue();
+        xx.trueSearchString = searchUtdBaseString;
+
+        //works this.addForm.setValue({utdstr: 'utdstr_yo', public: false, save2: true});
+        this.searchFormgroup.setValue(xx);
+
+
+
+
+
+
+
 
         //searchUtdBaseString = 'ff';
 

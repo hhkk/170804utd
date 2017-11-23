@@ -63,6 +63,7 @@ export class Utds4FormComponent implements OnInit {
 
 
     setSrch(srchStr): void {
+        alert('in setSrch srchStr:' + srchStr);
         this.addForm = this.formBuilder.group(
             {
                 utdstr: ['', Validators.required],
@@ -70,15 +71,11 @@ export class Utds4FormComponent implements OnInit {
                 save2: [true]
             });
 
-
         let xx = this.addForm.getRawValue();
-
         xx.utdstr = srchStr;
 
         //works this.addForm.setValue({utdstr: 'utdstr_yo', public: false, save2: true});
         this.addForm.setValue(xx);
-
-        //alert('in setSrch srchStr:' + srchStr);
     }
 
 
