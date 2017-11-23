@@ -52,7 +52,7 @@
 
             <!--// hbk state data entry string  -->
             <!--<a [routerLink]="['/utd4', utd._id]">{{utd.utdstr}}</a>-->
-            {{utd.date}}<a [routerLink]="['/utd4', utd._id]">xx{{utd.text}}</a>
+            {{utd.date}}<a [routerLink]="['/utd4', utd._id]">{{utd.text}}</a>
             jj
             <button class="remove-utd" md-icon-button *ngIf="isOwner(utd)" (click)="removeUtd(utd)">
                 <md-icon class="md-24">X</md-icon>
