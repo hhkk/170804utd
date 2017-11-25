@@ -24,14 +24,15 @@ import user = Meteor.user;
 export class Utds4FormComponent implements OnInit {
     addForm: FormGroup;
     setSearchStringForm: FormGroup;
-    hkbigstring1: string
+    currentstr: string
     images: string[] = [];
 
     constructor(
         private formBuilder: FormBuilder
     ) {
         //alert ('in Utds4FormComponent.construct');
-        this.hkbigstring1 = 'hkbigstring1b';
+        this.currentstr = '';
+        window.xxxglobalUtds4FormComponent = this;
     }
 
     ngOnInit() {
@@ -44,13 +45,10 @@ export class Utds4FormComponent implements OnInit {
             });
 
 
-
-        let xx = this.addForm.getRawValue();
-        xx.utdstr = 'sdsdfsdfsdfsdf';
-
-
-        //works this.addForm.setValue({utdstr: 'utdstr_yo', public: false, save2: true});
-        this.addForm.setValue(xx);
+        // let xx = window.xxxglobalUtds4FormComponent.addForm.getRawValue();
+        // xx.utdstr = 'sdsdfsdfsdfsdf';
+        // //works this.addForm.setValue({utdstr: 'utdstr_yo', public: false, save2: true});
+        // this.addForm.setValue(xx);
         // this.addForm.setValue({utdstr: 'utdstr_yo', last: 'Drew'});
 
         //alert('utdstr:' + this.addForm.getRawValue().utdstr);
@@ -62,18 +60,16 @@ export class Utds4FormComponent implements OnInit {
     }
 
 
-    setSrch(srchStr): void {
-        alert('in setSrch srchStr:' + srchStr);
+    setAddField (srchStr): void {
+        //alert('in setAddField srchStr:' + srchStr);
         this.addForm = this.formBuilder.group(
             {
                 utdstr: ['', Validators.required],
                 public: [false],
                 save2: [true]
             });
-
         let xx = this.addForm.getRawValue();
         xx.utdstr = srchStr;
-
         //works this.addForm.setValue({utdstr: 'utdstr_yo', public: false, save2: true});
         this.addForm.setValue(xx);
     }
@@ -105,7 +101,7 @@ export class Utds4FormComponent implements OnInit {
 //
 //         // alert('in add looking across to list window.xxxglobalUtds42List.constructedTime:' + window.xxxglobalUtds42List.constructedTime);
 //         //alert('in add BEFORE looking across to list window.xxxglobalUtds42List.searchutdbase:');
-//
+           this.currentstr = addUtdStr;
 //
         let x = window.xxxglobalUtds42List;
 //         // WORKS - OLD WAY - x.searchutdbase(this.addForm.value.utdstr);  // GLOBALUSAGE
@@ -189,8 +185,7 @@ export class Utds4FormComponent implements OnInit {
                         public: this.addForm.value.public,
                         owner: Meteor.userId(),
                         date: dt,
-                        text: this.addForm.value.utdstr,
-                        owner: Meteor.userId()
+                        text: this.addForm.value.utdstr
                     }
                     // , () => {
                     //     alert('in callback from utds42 insert');

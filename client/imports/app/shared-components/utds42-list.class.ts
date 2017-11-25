@@ -50,7 +50,7 @@ export class Utds42List implements OnInit, OnDestroy {
 
 
     constructor(private paginationService: PaginationService) {
-        //alert('in paginationService');
+        //alert('in Utds42List constructor');
         this.currentSearchString1 = 's1';
         this.constructedTime = new Date().toString();
         window.xxxglobalUtds42List = this;
@@ -80,7 +80,7 @@ export class Utds42List implements OnInit, OnDestroy {
                 limit: pageSize as number,
                 skip: ((curPage as number) - 1) * (pageSize as number),
                 // sort: {filelineraw: nameOrder as number}
-                sort: {text: 1}
+                sort: {filelineraw: 1}
             };
 
             //alert('in .sub %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%');
@@ -161,26 +161,14 @@ export class Utds42List implements OnInit, OnDestroy {
 
 
     searchutdbase(searchUtdBaseString: string): void {
-
-
-
-
-
-
-
-
         let xx = this.searchFormgroup.getRawValue();
         xx.trueSearchString = searchUtdBaseString;
 
+        window.xxxglobalUtds4FormComponent.currentstr = searchUtdBaseString;
+        //works this.addForm.setValue({utdstr: 'utdstr_yo', public: false, save2: true});
+
         //works this.addForm.setValue({utdstr: 'utdstr_yo', public: false, save2: true});
         this.searchFormgroup.setValue(xx);
-
-
-
-
-
-
-
 
         //searchUtdBaseString = 'ff';
 
@@ -220,5 +208,9 @@ export class Utds42List implements OnInit, OnDestroy {
         this.optionsSub.unsubscribe();
         this.autorunSub.unsubscribe();
         this.imagesSubs.unsubscribe();
+    }
+
+    setAddField(addstr) {
+        window.xxxglobalUtds4FormComponent.setAddField(addstr);
     }
 }
