@@ -18,6 +18,7 @@ import template from './utd4-details.component.html';
 import style from './utd4-details.component.scss';
 import {Utds42} from "../../../../../../both/collections/utds42.collection";
 import {Utd42} from "../../../../../../both/models/utd42.model";
+import JSONStream = Mocha.reporters.JSONStream;
 
 console.log ('hbkhbk in client utds4-details.component.ts');
 
@@ -91,10 +92,12 @@ export class Utd4DetailsComponent implements OnInit, OnDestroy {
 
         Utds42.update(this.utd._id, {
             $set: {
-                //utdstr: this.utd.utdstr,
+                filelineraw: this.utd.filelineraw,
                 'public': this.utd.public
             }
+
         });
+        alert ('saved update to:'+ JSON.stringify(this.utd));
     }
 
     inviteUtd(user: Meteor.User) {
