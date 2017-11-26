@@ -25,7 +25,7 @@ Meteor.publish('uninvitedUtd2', function (utdId: string) {
     const utd2= Utds2.findOne(utdId);
 
     if (!utd2) {
-        throw new Meteor.Error('404', 'No such utdId:' + utdId);
+        throw new Meteor.Error('404', 'No such utdId1:' + utdId);
     }
 
     return Meteor.users.find({
@@ -41,7 +41,7 @@ Meteor.publish('uninvitedUtd3', function (utdId: string) {
     const utd3= Utds3.findOne(utdId);
 
     if (!utd3) {
-        throw new Meteor.Error('404', 'No such utdId:' + utdId);
+        throw new Meteor.Error('404', 'No such utdId2:' + utdId);
     }
 
     return Meteor.users.find({
@@ -53,10 +53,10 @@ Meteor.publish('uninvitedUtd3', function (utdId: string) {
 });
 
 Meteor.publish('uninvitedUtd4', function (utdId: string) {
-    const utd4= Utds4.findOne(utdId);
+    const utd4= Utds42.findOne(utdId);
 
     if (!utd4) {
-        throw new Meteor.Error('404', 'No such utdId:' + utdId);
+        throw new Meteor.Error('404', 'No such utdId3:' + utdId);
     }
 
     return Meteor.users.find({

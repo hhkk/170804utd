@@ -7,12 +7,12 @@
 
 
           <label>Utd4 Name: </label>
-          <md-input [disabled]="!isOwner" [(ngModel)]="utd.utdstr" name="utdstr"></md-input>
+          <md-input [disabled]="!isOwner" [(ngModel)]="utd.text" name="text"></md-input>
           <br />
           <md-checkbox [disabled]="!isOwner" [(checked)]="utd.public" name="public" aria-label="Public">
             Public utd?
           </md-checkbox>
-xx
+xxx
           <div layout="row" layout-align="left">
             <button [disabled]="!isOwner" type="submit" md-raised-button color="accent">Save</button>
             <a [routerLink]="['/']" md-raised-button class="md-raised">Back</a>

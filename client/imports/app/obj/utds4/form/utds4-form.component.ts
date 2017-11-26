@@ -32,7 +32,7 @@ export class Utds4FormComponent implements OnInit {
     ) {
         //alert ('in Utds4FormComponent.construct');
         this.currentstr = '';
-        window.xxxglobalUtds4FormComponent = this;
+        (<any> window).xxxglobalUtds4FormComponent = this;
     }
 
     ngOnInit() {
@@ -101,9 +101,9 @@ export class Utds4FormComponent implements OnInit {
 //
 //         // alert('in add looking across to list window.xxxglobalUtds42List.constructedTime:' + window.xxxglobalUtds42List.constructedTime);
 //         //alert('in add BEFORE looking across to list window.xxxglobalUtds42List.searchutdbase:');
-           this.currentstr = addUtdStr;
+        this.currentstr = addUtdStr;
 //
-        let x = window.xxxglobalUtds42List;
+        let x = (<any> window).xxxglobalUtds42List;
 //         // WORKS - OLD WAY - x.searchutdbase(this.addForm.value.utdstr);  // GLOBALUSAGE
         x.searchutdbase(addUtdStr);  // NO GLOBALUSAGE
 //

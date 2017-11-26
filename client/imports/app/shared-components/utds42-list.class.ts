@@ -53,7 +53,7 @@ export class Utds42List implements OnInit, OnDestroy {
         //alert('in Utds42List constructor');
         this.currentSearchString1 = 's1';
         this.constructedTime = new Date().toString();
-        window.xxxglobalUtds42List = this;
+        (<any> window).xxxglobalUtds42List = this;
         //alert ('in Utds42List constructor, this.constructedTime:' + window.xxxglobalUtds42List.constructedTime);
     }
 
@@ -164,7 +164,7 @@ export class Utds42List implements OnInit, OnDestroy {
         let xx = this.searchFormgroup.getRawValue();
         xx.trueSearchString = searchUtdBaseString;
 
-        window.xxxglobalUtds4FormComponent.currentstr = searchUtdBaseString;
+        (<any> window).xxxglobalUtds4FormComponent.currentstr = searchUtdBaseString;
         //works this.addForm.setValue({utdstr: 'utdstr_yo', public: false, save2: true});
 
         //works this.addForm.setValue({utdstr: 'utdstr_yo', public: false, save2: true});
@@ -211,6 +211,6 @@ export class Utds42List implements OnInit, OnDestroy {
     }
 
     setAddField(addstr) {
-        window.xxxglobalUtds4FormComponent.setAddField(addstr);
+        (<any> window).xxxglobalUtds4FormComponent.setAddField(addstr);
     }
 }

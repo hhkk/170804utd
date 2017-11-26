@@ -7,13 +7,13 @@ import template from  './utds4-list.component.html';
 import style from './utds4-list.component.scss';
 
 @Component({
-  selector: 'utds4-listxxx',
-  template,
-  styles: [ style ]
+    selector: 'utds4-listxxx',
+    template,
+    styles: [ style ]
 })
 export class Utds4ListComponent extends Utds42List {
 //export class Utds4ListComponent extends Utds4List {
-  constructor(paginationService: PaginationService) {
-    super(paginationService);
-  }
+    constructor(paginationService: PaginationService) {
+        super(paginationService);
+    }
 }

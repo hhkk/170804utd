@@ -11,6 +11,7 @@ interface Options {
 // this is called by I guess
 Meteor.publish('utdbase', function(options: Options, location?: string) {
 
+    UtilLog.log('~~~~~~~~~~~~~~~~~ hbkhbk in publish (utdbase)');
         let locationTruncated = location.trim();
 
 
@@ -23,6 +24,7 @@ Meteor.publish('utdbase', function(options: Options, location?: string) {
             const searchArrayRegEx = buildQuery.call(this, null, locationTruncated);
 
             let ddd = Utds42.collection.find(searchArrayRegEx, {sort : { filelineraw : 1 }});
+            // Counts.publish(this, 'numberOfUtds', ddd, { noReady: true, sort : { filelineraw : -1 } });
             Counts.publish(this, 'numberOfUtds', ddd, { noReady: true, sort : { filelineraw : -1 } });
             //Counts.publish(this, 'numberOfUtds', Utds42.collection.find(searchArrayRegEx), { noReady: true , sort : { filelineraw : '-1' }});
 
@@ -52,8 +54,8 @@ Meteor.publish('userDatahbk', function () {
 //     }
 // }
 
-Meteor.publish('indivUtdhbkpubname4', function(utdId: string) {
-    console.log('=======hbkhbk in publish(utds42)');
+Meteor.publish('indivUtdhbkpubname42', function(utdId: string) {
+    UtilLog.log('=======hbkhbk in publish(indivUtdhbkpubname4)');
 
     //return Utds42.find(buildQuery.call(this, utdId), {$orderby: { filelineraw : -1 }});
     return Utds42.find(buildQuery.call(this, utdId));
