@@ -65,7 +65,7 @@ export class Utds42List implements OnInit, OnDestroy {
         });
 
         let xx = this.searchFormgroup.getRawValue();
-        xx.trueSearchString = 'trueSearchStringhk';
+        (<any>xx).trueSearchString = 'trueSearchStringhk';
 
         this.imagesSubs = MeteorObservable.subscribe('images').subscribe();
 
@@ -162,7 +162,7 @@ export class Utds42List implements OnInit, OnDestroy {
 
     searchutdbase(searchUtdBaseString: string): void {
         let xx = this.searchFormgroup.getRawValue();
-        xx.trueSearchString = searchUtdBaseString;
+        (<any>xx).trueSearchString = searchUtdBaseString;
 
         (<any> window).xxxglobalUtds4FormComponent.currentstr = searchUtdBaseString;
         //works this.addForm.setValue({utdstr: 'utdstr_yo', public: false, save2: true});

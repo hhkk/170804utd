@@ -57,7 +57,7 @@ export class Utd3DetailsComponent implements OnInit, OnDestroy {
                     console.log('hbkhbk in subscribe utd3pub');
                     MeteorObservable.autorun().subscribe(() => {
                         console.log('------------------ in Utds3 in MeteorObservable.autorun this.utd:'+this.utd);
-                        console.log('------------------ in Utds3 in MeteorObservable.autorun this.utdid:'+this.utdid);
+                        console.log('------------------ in Utds3 in MeteorObservable.autorun this.utdid:'+this.utdId);
                         this.utd = Utds3.findOne(this.utdId);
                         this.getUsers(this.utd);
                     });

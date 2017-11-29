@@ -69,7 +69,7 @@ export class Utds4FormComponent implements OnInit {
                 save2: [true]
             });
         let xx = this.addForm.getRawValue();
-        xx.utdstr = srchStr;
+        (<any>xx).utdstr = srchStr;
         //works this.addForm.setValue({utdstr: 'utdstr_yo', public: false, save2: true});
         this.addForm.setValue(xx);
     }
