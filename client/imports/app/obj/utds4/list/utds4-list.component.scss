@@ -6,41 +6,12 @@
   width: 100%;
   display: table;
 
-  .utds-list {
-    display: table-cell;
-    width: 50%;
-    vertical-align: top;
+  .utds4-listxxx {
+    color: pink;
+  }
 
-    .pagination {
-      display: inline;
-      text-align: center;
-    }
-
-    .filter-card {
-      margin: 20px;
-    }
-
-    .utd-card {
-      margin: 20px;
-      position: relative;
-
-      img.utd-main-image {
-        max-width: 100%;
-        max-height: 100%;
-      }
-
-      .utd-name > a {
-        color: black;
-        text-decoration: none;
-      }
-
-      .remove-utd {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-      }
-
-    }
+  .utds4-listxxx2 {
+    color: blue;
   }
 
   .utds-map {

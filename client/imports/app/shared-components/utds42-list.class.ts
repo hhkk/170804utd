@@ -48,6 +48,7 @@ export class Utds42List implements OnInit, OnDestroy {
     user: Meteor.User;
     imagesSubs: Subscription;
     searchFormgroup: FormGroup;
+    utds4listxxxVariable: string;
 
 
 
@@ -63,6 +64,7 @@ export class Utds42List implements OnInit, OnDestroy {
         this.constructedTime = new Date().toString();
         (<any> window).xxxglobalUtds42List = this;
         //alert ('in Utds42List constructor, this.constructedTime:' + window.xxxglobalUtds42List.constructedTime);
+        this.utds4listxxxVariable = "utds4-listxxx";
     }
 
 
@@ -75,10 +77,12 @@ export class Utds42List implements OnInit, OnDestroy {
         if ( Number (this.mymodel.slice(22,25)) % 2 == 1) {
             //console.log ('odd # :' + this.mymodel.slice(22,25));
             this.constructedTime = "odd "+(new Date()).toString();
+            this.utds4listxxxVariable = "utds4-listxxx";
         }
         else {
             //console.log ('even # :' + this.mymodel.slice(22,25));
             this.constructedTime = "even:" + (new Date()).toString();
+            this.utds4listxxxVariable = "utds4-listxxx2";
         }
         //console.log ('hk:' + this.mymodel.slice(22,25));
         //if ()
