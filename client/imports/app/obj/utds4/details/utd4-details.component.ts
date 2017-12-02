@@ -85,6 +85,7 @@ export class Utd4DetailsComponent implements OnInit, OnDestroy {
     }
 
     saveUtd() {
+        alert ('in saveUtd');
         if (!Meteor.userId()) {
             alert('Please log in to change this utd');
             return;

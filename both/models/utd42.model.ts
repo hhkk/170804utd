@@ -5,7 +5,7 @@ export interface Utd42 extends CollectionObject {
     filelineraw: string;
     //texty: string;
     date: string;
-    text: string;
+    //text: string;
     owner?: string;
     public?: boolean;
 

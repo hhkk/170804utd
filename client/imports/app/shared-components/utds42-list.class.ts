@@ -1,4 +1,4 @@
-import {OnDestroy, OnInit} from "@angular/core";
+import {OnDestroy, OnInit, ViewChild} from "@angular/core";
 // import {Input, OnDestroy, OnInit} from "@angular/core";
 import {Observable, Subscription, Subject} from "rxjs";
 //import {Utd4} from "../../../../both/models/utd4.model";
@@ -27,6 +27,8 @@ interface Options extends Pagination {
 
 @InjectUser('user')
 export class Utds42List implements OnInit, OnDestroy {
+    //@ViewChild('keyupAndModel') keyupAndModel;
+
     utdsxx2_42: Observable<Utd42[]>;
     utdsSub: Subscription;
     userDatahbkSub: Subscription;
@@ -37,6 +39,8 @@ export class Utds42List implements OnInit, OnDestroy {
     location:  Subject<string> = new Subject<string>();
     currentSearchString1:  string;
     constructedTime:  string;
+    counthkhk: number;
+    mymodel: string;
     currentSearchString:  Subject<string> = new Subject<string>();
     optionsSub: Subscription;
     utdsSize: number = 0;
@@ -45,6 +49,8 @@ export class Utds42List implements OnInit, OnDestroy {
     imagesSubs: Subscription;
     searchFormgroup: FormGroup;
 
+
+
     //1
     // @Input() xxxx: Utds4FormComponent;   // hbkhbk
 
@@ -52,13 +58,55 @@ export class Utds42List implements OnInit, OnDestroy {
     constructor(private paginationService: PaginationService) {
         //alert('in Utds42List constructor');
         this.currentSearchString1 = 's1';
+        this.counthkhk = 0;
+        this.mymodel = "mymodelValue";
         this.constructedTime = new Date().toString();
         (<any> window).xxxglobalUtds42List = this;
         //alert ('in Utds42List constructor, this.constructedTime:' + window.xxxglobalUtds42List.constructedTime);
     }
 
+
+
+
+    updateConstrTime(s): void {
+        //alert('in updateConstrTime() s:' + s);
+        console.log ('in updateConstrTime() s:' + s);
+        this.mymodel = (new Date()).toString();
+        if ( Number (this.mymodel.slice(22,25)) % 2 == 1) {
+            //console.log ('odd # :' + this.mymodel.slice(22,25));
+            this.constructedTime = "odd "+(new Date()).toString();
+        }
+        else {
+            //console.log ('even # :' + this.mymodel.slice(22,25));
+            this.constructedTime = "even:" + (new Date()).toString();
+        }
+        //console.log ('hk:' + this.mymodel.slice(22,25));
+        //if ()
+        //this.innerHtmlTrick =
+
+        // viewchild attempt failed I think
+        //  let element = this.keyupAndModel.nativeElement;
+        //element.setInnerHTML('sdfsdfds===================================== = = =                           ===========================');
+        // no work? document.getElementById('keyupAndModel').innerHTML = 'sssssssssss' + element;
+        // no more?        let target = angular.element('#keyupAndModel');
+    }
+
+
+    updateConstrTimeBlur(s): void {
+        //alert('in updateConstrTimeBlur() s:' + s);
+        console.log('in updateConstrTimeBlur() s:' + s);
+        this.constructedTime = "blur:" + (new Date()).toString();
+    }
+
+
+
+    ngAfterViewInit() {
+        // happenx after ngOnInit  alert('in ngAfterViewInit');
+    }
+
     ngOnInit() {
 
+        //alert('in ngOnInit');
 
         this.searchFormgroup = new FormGroup({
             trueSearchString: new FormControl()
@@ -148,10 +196,6 @@ export class Utds42List implements OnInit, OnDestroy {
 
 
 
-
-    updateConstrTime(): void {
-        this.constructedTime = (new Date()).toString();
-    }
 
 
 

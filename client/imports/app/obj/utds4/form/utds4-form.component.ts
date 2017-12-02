@@ -180,12 +180,12 @@ export class Utds4FormComponent implements OnInit {
                 (
                     {
                         //datey: dt,
-                        filelineraw: dt + ' ' + this.addForm.value.utdstr,
+                        filelineraw: this.addForm.value.utdstr,
                         //texty: this.addForm.value.utdstr,
                         public: this.addForm.value.public,
                         owner: Meteor.userId(),
-                        date: dt,
-                        text: this.addForm.value.utdstr
+                        date: dt
+                        //text: this.addForm.value.utdstr
                     }
                     // , () => {
                     //     alert('in callback from utds42 insert');
