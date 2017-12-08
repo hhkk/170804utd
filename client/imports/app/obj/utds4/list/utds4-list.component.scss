@@ -10,14 +10,14 @@
     color: pink;
   }
 
-  .utds4-listxxx2 {
-    color: blue;
-  }
 
   .utds-map {
     display: table-cell;
     width: 50%;
     vertical-align: top;
+    .utds4-listxxx2 {
+      color: red;
+    }
 
     .google-map {
       width: 100%;
@@ -25,3 +25,6 @@
     }
   }
 }
+
+
+

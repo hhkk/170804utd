@@ -68,7 +68,13 @@ export class Utds42List implements OnInit, OnDestroy {
     }
 
 
+    changeSortOrder() {
 
+    }
+
+    increment_counthkhk() {
+        this.counthkhk++;
+    }
 
     updateConstrTime(s): void {
         //alert('in updateConstrTime() s:' + s);
@@ -108,9 +114,12 @@ export class Utds42List implements OnInit, OnDestroy {
         // happenx after ngOnInit  alert('in ngAfterViewInit');
     }
 
-    ngOnInit() {
+    ngOnInit()  // init happens after constructor
+    {
 
-        //alert('in ngOnInit');
+        //alert('in utds42-list.class.ts ngOnInit');
+
+
 
         this.searchFormgroup = new FormGroup({
             trueSearchString: new FormControl()
@@ -118,6 +127,10 @@ export class Utds42List implements OnInit, OnDestroy {
 
         let xx = this.searchFormgroup.getRawValue();
         (<any>xx).trueSearchString = 'trueSearchStringhk';
+
+
+
+
 
         this.imagesSubs = MeteorObservable.subscribe('images').subscribe();
 
@@ -210,7 +223,7 @@ export class Utds42List implements OnInit, OnDestroy {
 
     searchutdbase(searchUtdBaseString: string): void {
         let xx = this.searchFormgroup.getRawValue();
-        (<any>xx).trueSearchString = searchUtdBaseString;
+        // (<any>xx).trueSearchString = searchUtdBaseString;
 
         (<any> window).xxxglobalUtds4FormComponent.currentstr = searchUtdBaseString;
         //works this.addForm.setValue({utdstr: 'utdstr_yo', public: false, save2: true});

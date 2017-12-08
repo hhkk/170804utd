@@ -26,6 +26,11 @@ export class Utds4FormComponent implements OnInit {
     setSearchStringForm: FormGroup;
     currentstr: string
     images: string[] = [];
+    modelutdstr2:string;
+    modelDynamic: boolean;
+    modelSaveCB: boolean;
+    modelTextAddSearch: string;
+    lastKey: number;
 
     constructor(
         private formBuilder: FormBuilder
@@ -33,6 +38,14 @@ export class Utds4FormComponent implements OnInit {
         //alert ('in Utds4FormComponent.construct');
         this.currentstr = '';
         (<any> window).xxxglobalUtds4FormComponent = this;
+        this.modelutdstr2 = ""; // can initialize default search string here
+        this.modelDynamic = true;
+        this.modelSaveCB = true;
+    }
+
+    clearSearch() {
+        alert ('in clearSearch  ');
+        //this.modelutdstr2 = "";
     }
 
     ngOnInit() {
@@ -41,7 +54,8 @@ export class Utds4FormComponent implements OnInit {
             {
                 utdstr: ['', Validators.required],
                 public: [false],
-                save2: [true]
+                save2: [true],
+                dynamic: [true]
             });
 
 
@@ -74,6 +88,10 @@ export class Utds4FormComponent implements OnInit {
         this.addForm.setValue(xx);
     }
 
+
+    eventUtdsformKeyup(s) {
+        alert('in eventUtdsformKeyup');
+    }
 
     //addUtd(addUtdStr, saveUtdCheckbox, publicUtdCheckbox): void {
     addUtd(addUtdStr, saveHtmlHolder, publicHtmlHolder): void {
@@ -316,4 +334,24 @@ export class Utds4FormComponent implements OnInit {
     onImage(imageId: string) {
         this.images.push(imageId);
     }
+
+    //lastKey = null;
+    eventKeyHandlerUtdForm(e, s): void {
+
+        (<any> window).xxxglobalUtds42List.increment_counthkhk();
+
+        if (e == 32 && this.lastKey == 32)
+        {
+           this.modelSaveCB = !this.modelSaveCB;
+           this.lastKey = 0;
+        }
+        else {
+            this.lastKey = e;
+        }
+
+        //alert ('in eventKeyHandlerUtdForm() e:' + e);
+       // alert ('in eventKeyHandlerUtdForm() s.utdstr:' + s.utdstr);
+
+    }
+
 }

@@ -1,7 +1,7 @@
 
 <div class="form-container">
     <div class="container-background">
-        {{currentstr}}
+
         <div class="form-content">
             <div class="form-center">
                 <form *ngIf="user" [formGroup]="addForm" (ngSubmit)="addUtd(utdstrhtmlholder.value, saveHtmlHolder);">
@@ -9,11 +9,20 @@
                         <div class="form-inputs">
                             <!--hiMom2!!!!!  \obj\utds4\utds4-form.component.html-->
 
-                            <md-input    #utdstrhtmlholder formControlName="utdstr"  placeholder="Add"  dividerColor="accent" ></md-input>
+                            <!-- Main input -->
+                            <md-input #utdstrhtmlholder formControlName="utdstr"
+                                      autofocus
+                                      placeholder="Search / Add"
+                                      [ngModel]="modelutdstr2"
+                                         (keyup) ="eventKeyHandlerUtdForm($event.keyCode, addForm.value)" dividerColor="accent" ></md-input>
 
-                            <md-checkbox #saveHtmlHolder   formControlName="save2">  Add               </md-checkbox>
+                            <a xxxclass="clear" href="" (click)="clearSearch()">Xxx</a>
+
+                            <md-checkbox #saveHtmlHolder  [ngModel]="modelSaveCB"  formControlName="save2">   Add else:  {{modelTextAddSearch}}               </md-checkbox>
                             <md-checkbox #publicHtmlHolder formControlName="public"> Public             </md-checkbox>
-                            <button color="accent" md-raised-button type="submit">Add</button>
+                            <md-checkbox #htmlHolderDynamic [ngModel]="modelDynamic" formControlName="dynamic"> Dynamic</md-checkbox>
+                            <button color="accent" md-raised-button type="submit">Save</button>
+                            {{currentstr}}
                         </div>
                     </div>
                 </form>

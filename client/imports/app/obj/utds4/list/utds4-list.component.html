@@ -3,7 +3,7 @@
 
 <div class="utds-list-container">
     <div class={{utds4listxxxVariable}}>
-        HBKTEST =======================
+        <!--HBKTEST =======================-->
         <!--HBK top half - data entry -->
         <div >
             <!--utds4B hbk obj\utds4\utds4-list.component.html-->
@@ -28,12 +28,12 @@
             <!--<input value="keyup" #keyup       (blur) = "updateConstrTimeBlur(searchFormgroup.value)"   [ngModel]    ="mymodel" (keyup)        ="updateConstrTime(searchFormgroup.value)">-->
             <!--<input value="keyup" #keyup       (blur) = "updateConstrTimeBlur(searchFormgroup.value)"                           (keyup)        ="updateConstrTime(searchFormgroup.value)">-->
 
-            1<input value="ng-keydown"         (blur) = "updateConstrTimeBlur(searchFormgroup.value)"                           (keypress)     ="updateConstrTime('sdfsdf:' + $event.keyCode)"  ng-init="this.counthkhk=0">
-            2<input value="ngModelChange"      (blur) = "updateConstrTimeBlur(searchFormgroup.value)"   [ngModel]    ="mymodel" (ngModelChange)="updateConstrTime($event)">
-            3<input               #keyup.enter (blur) = "updateConstrTimeBlur(searchFormgroup.value)"                           (keyup.enter)  ="updateConstrTime(searchFormgroup.value)">
-            4<input #keyupAndModel             (blur) = "updateConstrTimeBlur(searchFormgroup.value)"   [ngModel]    ="mymodel" (keyup)        ="updateConstrTime(searchFormgroup.value)">
-            5<input value="keyup" #keyup       (blur) = "updateConstrTimeBlur(searchFormgroup.value)"                           (keyup)        ="updateConstrTime(searchFormgroup.value)">
-            6<input id="foo" type="range">
+            <!--1<input value="ng-keydown"         (blur) = "updateConstrTimeBlur(searchFormgroup.value)"                           (keypress)     ="updateConstrTime('sdfsdf:' + $event.keyCode)"  ng-init="this.counthkhk=0">-->
+            <!--2<input value="ngModelChange"      (blur) = "updateConstrTimeBlur(searchFormgroup.value)"   [ngModel]    ="mymodel" (ngModelChange)="updateConstrTime($event)">-->
+            <!--3<input               #keyup.enter (blur) = "updateConstrTimeBlur(searchFormgroup.value)"                           (keyup.enter)  ="updateConstrTime(searchFormgroup.value)">-->
+            <input #keyupAndModel             (blur) = "updateConstrTimeBlur(searchFormgroup.value)"   [ngModel]    ="mymodel" (keyup)        ="updateConstrTime(searchFormgroup.value)">
+            <!--5<input value="keyup" #keyup       (blur) = "updateConstrTimeBlur(searchFormgroup.value)"                           (keyup)        ="updateConstrTime(searchFormgroup.value)">-->
+            <!--6<input id="foo" type="range">-->
 
 
             mymodel:{{mymodel}}
@@ -42,7 +42,7 @@
             <form [formGroup]="searchFormgroup" >
 
                 <!--Search-->
-                <md-input #searchFormOnlyInput formControlName="trueSearchString"  dividerColor="primary" type="text" #searchtext2 placeholder="SearchHBK"></md-input>
+                <!--<md-input #searchFormOnlyInput formControlName="trueSearchString"  dividerColor="primary" type="text" #searchtext2 placeholder="SearchHBK"></md-input>-->
 
                 <!-- HBK FilterUtd42! button -->
                 <button color="accent" md-button (click)="searchutdbase   (searchtext2.value)">SearchUtdBase!</button>
@@ -63,6 +63,8 @@
         <!--HBK bottom half - filter by location and filtered list -->
         <!--<pagination-controls class="pagination" (pageChange)="onPageChanged($event)"></pagination-controls>-->
 
+        <pagination-controls class="pagination" (pageChange)="onPageChanged($event)"></pagination-controls>
+
         <!--hbk loop -->
         <div *ngFor="let utd of utdsxx2_42 | async" class="utd-card">
             <!--top2---------------------------------------<br>-->
@@ -81,6 +83,5 @@
             ee3
         </div>
 
-        <pagination-controls class="pagination" (pageChange)="onPageChanged($event)"></pagination-controls>
     </div>
 </div>
