@@ -31,6 +31,7 @@ export class Utds4FormComponent implements OnInit {
     modelSaveCB: boolean;
     modelTextAddSearch: string;
     lastKey: number;
+    modelSaveVsAddButtonLabel: string;
 
     constructor(
         private formBuilder: FormBuilder
@@ -41,12 +42,26 @@ export class Utds4FormComponent implements OnInit {
         this.modelutdstr2 = ""; // can initialize default search string here
         this.modelDynamic = true;
         this.modelSaveCB = true;
+        this.modelSaveVsAddButtonLabel = "Savexx";
     }
 
     clearSearch() {
         alert ('in clearSearch  ');
         //this.modelutdstr2 = "";
     }
+
+    changePropagate_modelSaveCB (event) {
+        console.log ('in 1 changePropagate_modelSaveCB event TOP:' + event);
+        if (!event) {
+            console.log ('in 2 changePropagate_modelSaveCB event FALSE SAV:' + event);
+            this.modelSaveVsAddButtonLabel = "Search";
+        } else {
+            console.log ('in 3 changePropagate_modelSaveCB event TRUE SAV:' + event);
+            this.modelSaveVsAddButtonLabel = "Add";
+        }
+        console.log ('in 4 changePropagate_modelSaveCB event DONE:' + event);
+    }
+
 
     ngOnInit() {
         //alert('in Utds4FormComponent.ngOnInit()');
@@ -343,6 +358,8 @@ export class Utds4FormComponent implements OnInit {
         if (e == 32 && this.lastKey == 32)
         {
            this.modelSaveCB = !this.modelSaveCB;
+
+
            this.lastKey = 0;
         }
         else {

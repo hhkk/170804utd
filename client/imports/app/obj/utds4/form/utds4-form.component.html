@@ -18,10 +18,16 @@
 
                             <a xxxclass="clear" href="" (click)="clearSearch()">Xxx</a>
 
-                            <md-checkbox #saveHtmlHolder  [ngModel]="modelSaveCB"  formControlName="save2">   Add else:  {{modelTextAddSearch}}               </md-checkbox>
+                            <!-- SAVE CHECKBOX -->
+                            <md-checkbox #saveHtmlHolder
+                                         (ngModelChange)="changePropagate_modelSaveCB($event)"
+                                         [ngModel]="modelSaveCB"
+                                         (ngModelChange)="changePropagate_modelSaveCB($event)"
+                                         formControlName="save2">   Add else:  {{modelTextAddSearch}}               </md-checkbox>
                             <md-checkbox #publicHtmlHolder formControlName="public"> Public             </md-checkbox>
                             <md-checkbox #htmlHolderDynamic [ngModel]="modelDynamic" formControlName="dynamic"> Dynamic</md-checkbox>
-                            <button color="accent" md-raised-button type="submit">Save</button>
+
+                            x<button color="accent" md-raised-button type="submit">{{modelSaveVsAddButtonLabel}}</button>x
                             {{currentstr}}
                         </div>
                     </div>
