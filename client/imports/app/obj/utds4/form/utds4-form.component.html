@@ -10,28 +10,33 @@
                             <!--hiMom2!!!!!  \obj\utds4\utds4-form.component.html-->
 
                             <!-- Main input -->
+                            modelutdstr2:{{modelutdstr2}}
+                            <button color="white" md-button (click)="updatemodelutdstr2()">updatemodelutdstr2()</button>
                             <md-input #utdstrhtmlholder formControlName="utdstr"
                                       autofocus
-                                      placeholder="Search / Add"
+                                      (ngModelChange)="changePropagate_modelSaveCB2($event)"
+                                      placeholder="Search orß Save"
                                       [ngModel]="modelutdstr2"
                                          (keyup) ="eventKeyHandlerUtdForm($event.keyCode, addForm.value)" dividerColor="accent" ></md-input>
 
-                            <a xxxclass="clear" href="" (click)="clearSearch()">Xxx</a>
+                            <!-- SEARCH/ADD button -->
+                            <button color="accent" md-raised-button type="submit">{{modelSaveVsAddButtonLabel}}</button>
 
+
+                            <!-- current search string -->
                             <!-- SAVE CHECKBOX -->
                             <md-checkbox #saveHtmlHolder
-                                         (ngModelChange)="changePropagate_modelSaveCB($event)"
                                          [ngModel]="modelSaveCB"
                                          (ngModelChange)="changePropagate_modelSaveCB($event)"
-                                         formControlName="save2">   Add else:  {{modelTextAddSearch}}               </md-checkbox>
+                                         formControlName="save2">Save</md-checkbox>
+
                             <md-checkbox #publicHtmlHolder formControlName="public"> Public             </md-checkbox>
                             <md-checkbox #htmlHolderDynamic [ngModel]="modelDynamic" formControlName="dynamic"> Dynamic</md-checkbox>
-
-                            x<button color="accent" md-raised-button type="submit">{{modelSaveVsAddButtonLabel}}</button>x
-                            {{currentstr}}
+                            {{lastSearchedString}}
                         </div>
                     </div>
                 </form>
+                <a xxxclass="clear" href="" (click)="clearSearch()">Xxx</a>
 
                 <!--<form *ngIf="user" [formGroup]="setSearchStringForm" (ngSubmit)="setAddField(htmlholderSetSrch.value)">-->
                     <!--<div style="display: table-row">-->

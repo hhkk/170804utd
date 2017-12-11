@@ -19,7 +19,7 @@ export class UtilDate {
             d.slice(17,19) ;
         ;
 
-        UtilLog.log('############################## fromUtilDates:' + dts);
+        //UtilLog.log('############################## fromUtilDates:' + dts);
 
         return dts;
 

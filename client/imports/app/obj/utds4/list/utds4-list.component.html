@@ -31,7 +31,8 @@
             <!--1<input value="ng-keydown"         (blur) = "updateConstrTimeBlur(searchFormgroup.value)"                           (keypress)     ="updateConstrTime('sdfsdf:' + $event.keyCode)"  ng-init="this.counthkhk=0">-->
             <!--2<input value="ngModelChange"      (blur) = "updateConstrTimeBlur(searchFormgroup.value)"   [ngModel]    ="mymodel" (ngModelChange)="updateConstrTime($event)">-->
             <!--3<input               #keyup.enter (blur) = "updateConstrTimeBlur(searchFormgroup.value)"                           (keyup.enter)  ="updateConstrTime(searchFormgroup.value)">-->
-            <input #keyupAndModel             (blur) = "updateConstrTimeBlur(searchFormgroup.value)"   [ngModel]    ="mymodel" (keyup)        ="updateConstrTime(searchFormgroup.value)">
+            <input #keyupAndModel             (blur) = "updateConstrTimeBlur(searchFormgroup.value)"   [ngModel]    ="mymodel"
+                   (keyup)="updateConstrTime(searchFormgroup.value)">
             <!--5<input value="keyup" #keyup       (blur) = "updateConstrTimeBlur(searchFormgroup.value)"                           (keyup)        ="updateConstrTime(searchFormgroup.value)">-->
             <!--6<input id="foo" type="range">-->
 
@@ -65,19 +66,25 @@
 
         <pagination-controls class="pagination" (pageChange)="onPageChanged($event)"></pagination-controls>
 
+
+        <!--<textarea colls="30" rows="4" (input)="str = $event.target.value"></textarea>-->
+        <textarea cols="200" rows="10" [ngModel]    = "modelTextArea"
+                  (input)="textAreaChanged()">fff</textarea>
+
         <!--hbk loop -->
         <div *ngFor="let utd of utdsxx2_42 | async" class="utd-card">
             <!--top2---------------------------------------<br>-->
             <img *ngIf="utd.images && utd.images.length > 0" class="utd-main-image" [src]="utd | displayMainImage">
 
-
+            title=
             <!--// hbk state data entry string  -->
             <!--<a [routerLink]="['/utd4', utd._id]">{{utd.utdstr}}</a>-->
-            cc3
             {{utd._id}}
             {{utd.date}}&nbsp;&nbsp;&nbsp;<a [routerLink]="['/utd4/'+ utd._id]">{{utd.filelineraw}}</a>
-            dd3
             <button class="remove-utd" md-icon-button *ngIf="isOwner(utd)" (click)="removeUtd(utd)">
+                <md-icon class="md-24">del</md-icon>
+            </button>
+            <button class="remove-utd" md-icon-button (click)="removeUtd(utd)">
                 <md-icon class="md-24">del</md-icon>
             </button>
             ee3

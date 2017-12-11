@@ -24,25 +24,29 @@ import user = Meteor.user;
 export class Utds4FormComponent implements OnInit {
     addForm: FormGroup;
     setSearchStringForm: FormGroup;
-    currentstr: string
+    lastSearchedString: string;
     images: string[] = [];
+
     modelutdstr2:string;
-    modelDynamic: boolean;
+    modelDynamic    : boolean;
     modelSaveCB: boolean;
     modelTextAddSearch: string;
     lastKey: number;
+    lastKeyTime: number;
     modelSaveVsAddButtonLabel: string;
 
     constructor(
         private formBuilder: FormBuilder
     ) {
         //alert ('in Utds4FormComponent.construct');
-        this.currentstr = '';
+        this.lastSearchedString = '';
         (<any> window).xxxglobalUtds4FormComponent = this;
         this.modelutdstr2 = ""; // can initialize default search string here
         this.modelDynamic = true;
         this.modelSaveCB = true;
-        this.modelSaveVsAddButtonLabel = "Savexx";
+        this.lastKeyTime = (new Date()).getTime();
+
+        //this.modelSaveVsAddButtonLabel = "Savexx";
     }
 
     clearSearch() {
@@ -51,16 +55,22 @@ export class Utds4FormComponent implements OnInit {
     }
 
     changePropagate_modelSaveCB (event) {
-        console.log ('in 1 changePropagate_modelSaveCB event TOP:' + event);
+        //console.log ('in 1 changePropagate_modelSaveCB event TOP:' + event);
         if (!event) {
-            console.log ('in 2 changePropagate_modelSaveCB event FALSE SAV:' + event);
+            //console.log ('in 2 changePropagate_modelSaveCB event FALSE SAV:' + event);
             this.modelSaveVsAddButtonLabel = "Search";
         } else {
-            console.log ('in 3 changePropagate_modelSaveCB event TRUE SAV:' + event);
-            this.modelSaveVsAddButtonLabel = "Add";
+            //console.log ('in 3 changePropagate_modelSaveCB event TRUE SAV:' + event);
+            this.modelSaveVsAddButtonLabel = "Save";
         }
-        console.log ('in 4 changePropagate_modelSaveCB event DONE:' + event);
+        //console.log ('in 4 changePropagate_modelSaveCB event DONE:' + event);
     }
+
+    changePropagate_modelSaveCB2 (event) {
+
+        // alert ('in 1 changePropagate_modelSaveCB2 event TOP:' + event);
+    }
+
 
 
     ngOnInit() {
@@ -134,7 +144,6 @@ export class Utds4FormComponent implements OnInit {
 //
 //         // alert('in add looking across to list window.xxxglobalUtds42List.constructedTime:' + window.xxxglobalUtds42List.constructedTime);
 //         //alert('in add BEFORE looking across to list window.xxxglobalUtds42List.searchutdbase:');
-        this.currentstr = addUtdStr;
 //
         let x = (<any> window).xxxglobalUtds42List;
 //         // WORKS - OLD WAY - x.searchutdbase(this.addForm.value.utdstr);  // GLOBALUSAGE
@@ -154,6 +163,7 @@ export class Utds4FormComponent implements OnInit {
 //                     try {
 //
 //
+            UtilLog.log("------------- PRE INSERT PRE INSERT: [" + this.addForm.value.utdstr + "]");
             let dt = UtilDate.getDateStr(new Date()).toString();
 //                         //Utds42.insert(docToInsert);
 //
@@ -353,21 +363,54 @@ export class Utds4FormComponent implements OnInit {
     //lastKey = null;
     eventKeyHandlerUtdForm(e, s): void {
 
+        this.lastKeyTime = (new Date()).getTime();
+
         (<any> window).xxxglobalUtds42List.increment_counthkhk();
 
-        if (e == 32 && this.lastKey == 32)
+        if ((e == 32 && this.lastKey == 32)  ||   (e == 229 && this.lastKey == 229) )
         {
-           this.modelSaveCB = !this.modelSaveCB;
+            this.modelSaveCB = !this.modelSaveCB;
 
 
-           this.lastKey = 0;
+            this.lastKey = 0;
         }
         else {
             this.lastKey = e;
         }
+        //UtilLog.log('-------- start timeout');
+        setTimeout(() => {
+
+            let cmpForm = (<any> window).xxxglobalUtds4FormComponent;
+            let lastKeyTimeLocal = cmpForm.lastKeyTime;
+            if ((new Date()).getTime() - lastKeyTimeLocal > 250 )
+            {
+                //UtilLog.log('-------- in timeout past level 1');
+                //if (cmpForm.modelutdstr2 != cmpForm.lastSearchedString)
+                {
+                    //UtilLog.log('-------- in timeout past level 2');
+                    if (this.modelSaveCB && this.addForm.value.utdstr.length > 2) {
+                        //UtilLog.log('call searchutdbase:'+this.addForm.value.utdstr);
+                        this.modelutdstr2 = this.addForm.value.utdstr;
+                        (<any> window).xxxglobalUtds42List.searchutdbase(this.modelutdstr2);
+
+                        //this.modelutdstr2 = "xx:" + UtilDate.getDateStr(new Date()).toString() + " [" + this.addForm.value.utdstr + "]";
+                    }
+                }
+
+            }
+        }, 500);
+
+
+
+
 
         //alert ('in eventKeyHandlerUtdForm() e:' + e);
-       // alert ('in eventKeyHandlerUtdForm() s.utdstr:' + s.utdstr);
+        // alert ('in eventKeyHandlerUtdForm() s.utdstr:' + s.utdstr);
+
+    }
+
+    updatemodelutdstr2() {
+        // alert('this.modelutdstr2:'+this.modelutdstr2);
 
     }
 

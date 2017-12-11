@@ -187,6 +187,11 @@ export class UtilLog {
                 //eval ("alert ('============================= eval in utd2s.methods.ts must be client infoStr xx [" + UtdEnum.Severity[severity] + '.' + errStr + "]');");
             }
 
+            if ((<any> window).xxxglobalUtds42List) {
+                (<any> window).xxxglobalUtds42List.modelTextArea = s2 + "\r\n" + (<any> window).xxxglobalUtds42List.modelTextArea;
+
+
+            }
             //eval ("alert ('============================= eval in utd2s.methods.ts must be client');");
 
         }

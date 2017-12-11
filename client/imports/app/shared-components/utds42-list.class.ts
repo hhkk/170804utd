@@ -36,7 +36,10 @@ export class Utds42List implements OnInit, OnDestroy {
     pageSize:  Subject<number> = new Subject<number>();
     curPage:   Subject<number> = new Subject<number>();
     nameOrder: Subject<number> = new Subject<number>();
-    location:  Subject<string> = new Subject<string>();
+    obsUtdsList:  Subject<string> = new Subject<string>();
+    // An RxJS Subject is a special type of Observable that allows values to be multicasted to many Observers.
+    // While plain Observables are unicast (each subscribed Observer owns an independent execution of the Observable), Subjects are multicast.
+    // A Subject is like an Observable, but can multicast to many Observers.
     currentSearchString1:  string;
     constructedTime:  string;
     counthkhk: number;
@@ -49,6 +52,7 @@ export class Utds42List implements OnInit, OnDestroy {
     imagesSubs: Subscription;
     searchFormgroup: FormGroup;
     utds4listxxxVariable: string;
+    modelTextArea:string;
 
 
 
@@ -139,8 +143,8 @@ export class Utds42List implements OnInit, OnDestroy {
             this.pageSize,
             this.curPage,
             this.nameOrder,
-            this.location
-        ).subscribe(([pageSize, curPage, nameOrder, location]) => {
+            this.obsUtdsList
+        ).subscribe(([pageSize, curPage, nameOrder, obsUtdsList]) => {
             const options: Options = {
                 limit: pageSize as number,
                 skip: ((curPage as number) - 1) * (pageSize as number),
@@ -156,11 +160,22 @@ export class Utds42List implements OnInit, OnDestroy {
                 this.utdsSub.unsubscribe();
             }
 
+
+
+
+
+
+
+
+
+
+            // SUBSCR SUBSCR SUBSCR SUBSCR SUBSCR SUBSCR SUBSCR SUBSCR SUBSCR SUBSCR SUBSCR SUBSCR SUBSCR SUBSCR SUBSCR SUBSCR SUBSCR SUBSCR
             // this CLIENT file connects to/calls file /Users/hkon/utd/170804utd/server/imports/publications/utds42.ts
             // so a publication is called by a shared component in the pub-sub framework
-            this.utdsSub = MeteorObservable.subscribe('utdbase', options, location).subscribe(() => {
-                UtilLog.log(' hbkhbk ===== client side utds42 subscriber  ========================== ');
+            this.utdsSub = MeteorObservable.subscribe('utdbase', options, obsUtdsList).subscribe(() => {
+                UtilLog.log('===================== hbkhbk ===== FIND FIND client side utds42 subscriber  ========================== ');
 
+                // FIND FIND FIND FIND FIND FIND FIND FIND FIND FIND FIND FIND FIND FIND FIND FIND FIND FIND FIND FIND FIND FIND FIND FIND FIND FIND
                 // works this.utdsxx2_42 = Utds42.find({text:/.*hbk.*/}, {
                 this.utdsxx2_42 = Utds42.find({}, {
                     sort: {
@@ -171,7 +186,7 @@ export class Utds42List implements OnInit, OnDestroy {
                 }).zone();
             });
 
-            // this.userDatahbkSub = MeteorObservable.subscribe('userDatahbk', options, location).subscribe(() => {
+            // this.userDatahbkSub = MeteorObservable.subscribe('userDatahbk', options, obsUtdsList).subscribe(() => {
             //      UtilLog.log(' hbkhbk ===== client side utds42 subscriber  ========================== ');
             //
             //      // works this.utdsxx2_42 = Utds42.find({text:/.*hbk.*/}, {
@@ -195,7 +210,7 @@ export class Utds42List implements OnInit, OnDestroy {
         this.pageSize.next(10);
         this.curPage.next(1);
         this.nameOrder.next(1);
-        this.location.next('');
+        this.obsUtdsList.next('');
 
         this.autorunSub = MeteorObservable.autorun().subscribe(() => {
             this.utdsSize = Counts.get('numberOfUtds');
@@ -207,7 +222,7 @@ export class Utds42List implements OnInit, OnDestroy {
     }
 
     removeUtd(utd: Utd42): void {
-        UtilLog.utdmLog("lookin good!!!!!!!!!!! ", UtdEnum.Severity.INFO);
+        //UtilLog.utdmLog("lookin good!!!!!!!!!!! ", UtdEnum.Severity.INFO);
         Utds42.remove(utd._id);
     }
 
@@ -221,11 +236,13 @@ export class Utds42List implements OnInit, OnDestroy {
 
 
 
+
     searchutdbase(searchUtdBaseString: string): void {
+        //console.log (' ============ in searchutdbase for [' + searchUtdBaseString + ']');
         let xx = this.searchFormgroup.getRawValue();
         // (<any>xx).trueSearchString = searchUtdBaseString;
 
-        (<any> window).xxxglobalUtds4FormComponent.currentstr = searchUtdBaseString;
+        (<any> window).xxxglobalUtds4FormComponent.lastSearchedString = searchUtdBaseString;
         //works this.addForm.setValue({utdstr: 'utdstr_yo', public: false, save2: true});
 
         //works this.addForm.setValue({utdstr: 'utdstr_yo', public: false, save2: true});
@@ -235,9 +252,7 @@ export class Utds42List implements OnInit, OnDestroy {
 
         //alert('================ in searchutdbase ++++++++++++++++ :' + searchUtdBaseString);
 
-        this.currentSearchString1 = searchUtdBaseString;
-
-        UtilLog.utdmLog(" in searchutdbase  :" + searchUtdBaseString , UtdEnum.Severity.INFO);
+        //UtilLog.utdmLog(" in searchutdbase  :" + searchUtdBaseString , UtdEnum.Severity.INFO);
 
         this.currentSearchString.next(searchUtdBaseString);
         this.currentSearchString1 = searchUtdBaseString;
@@ -245,11 +260,11 @@ export class Utds42List implements OnInit, OnDestroy {
         setTimeout(() => { this.currentSearchString1 = searchUtdBaseString+'lllll';}, 2000)
         //setTimeout(() => { alert('hi mom!:'+this.currentSearchString1)}, 4000)
         //UtilLog.utdmLog("lookin good SEARCH !!!!!!!!!!! 1", UtdEnum.Severity.INFO);
-        //let a = $location.search();
-        UtilLog.utdmLog(" slookin good SEARCH !!!!!!!!!!! 2:" + searchUtdBaseString , UtdEnum.Severity.INFO);
+        //let a = $obsUtdsList.search();
+        UtilLog.utdmLog(" ==============  obsUtdsList.next !!!!!!!!!!! :" + searchUtdBaseString , UtdEnum.Severity.INFO);
 
         this.curPage.next(1);
-        this.location.next(searchUtdBaseString);
+        this.obsUtdsList.next(searchUtdBaseString); // see
     }
 
     onPageChanged(page: number): void {
