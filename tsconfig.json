@@ -17,8 +17,8 @@
   "files": [
     "typings.d.ts"
   ],
-  "compileOnSave": false,
-  "angularCompilerOptions": {
+    "compileOnSave": false,
+    "angularCompilerOptions": {
     "genDir": "aot",
     "skipMetadataEmit": true
   }

@@ -15,6 +15,12 @@ import user = Meteor.user;
 // import { Utds4ListComponent } from "../list/utds4-list.component";
 // import {PaginationService} from "ng2-pagination";
 
+interface kbQelem {
+    time?: number;
+    e?: number;
+}
+
+
 @Component({
     selector: 'utds-formx2634',
     template,
@@ -34,6 +40,9 @@ export class Utds4FormComponent implements OnInit {
     lastKey: number;
     lastKeyTime: number;
     modelSaveVsAddButtonLabel: string;
+    kbqueue: kbQelem [];
+
+
 
     constructor(
         private formBuilder: FormBuilder
@@ -45,6 +54,7 @@ export class Utds4FormComponent implements OnInit {
         this.modelDynamic = true;
         this.modelSaveCB = true;
         this.lastKeyTime = (new Date()).getTime();
+        this.kbqueue = [];
 
         //this.modelSaveVsAddButtonLabel = "Savexx";
     }
@@ -360,46 +370,112 @@ export class Utds4FormComponent implements OnInit {
         this.images.push(imageId);
     }
 
+
+    // interface kbQelem {
+    //     time: number,
+    //     event: object
+    // }
+
+
     //lastKey = null;
+
+    //this.kbqueue = null;
+
+    isSpace (e) {
+
+        return e == 32 || e == 229;
+    }
+
     eventKeyHandlerUtdForm(e, s): void {
 
-        this.lastKeyTime = (new Date()).getTime();
-
-        (<any> window).xxxglobalUtds42List.increment_counthkhk();
-
-        if ((e == 32 && this.lastKey == 32)  ||   (e == 229 && this.lastKey == 229) )
-        {
-            this.modelSaveCB = !this.modelSaveCB;
+        UtilLog.log('e:' + e);
+        try {
 
 
-            this.lastKey = 0;
-        }
-        else {
-            this.lastKey = e;
-        }
-        //UtilLog.log('-------- start timeout');
-        setTimeout(() => {
 
-            let cmpForm = (<any> window).xxxglobalUtds4FormComponent;
-            let lastKeyTimeLocal = cmpForm.lastKeyTime;
-            if ((new Date()).getTime() - lastKeyTimeLocal > 250 )
-            {
-                //UtilLog.log('-------- in timeout past level 1');
-                //if (cmpForm.modelutdstr2 != cmpForm.lastSearchedString)
+
+
+            this.modelutdstr2 = this.addForm.value.utdstr;
+            let x2 = ({time:(new Date()).getTime(), e:e});
+            this.kbqueue.splice(0, 0, x2);
+            //this.kbqueue.push(x2);
+            //this.keyboardqueue.push({'time':(new Date()).getTime(), 'event':e});
+            (<any> window).xxxglobalUtds42List.increment_counthkhk();
+
+            if (this.kbqueue.length > 1) {
+                let elapsedSinceLastKB = this.kbqueue[0].time - this.kbqueue[1].time;
+                if (elapsedSinceLastKB < 1000 && this.isSpace(this.kbqueue[0].e) && this.isSpace(this.kbqueue[1].e))
                 {
-                    //UtilLog.log('-------- in timeout past level 2');
-                    if (this.modelSaveCB && this.addForm.value.utdstr.length > 2) {
+                    UtilLog.log('in tight kbd event1 modelutdstr2:'+this.modelutdstr2);
+                    UtilLog.log('in tight kbd event2 addForm.value.utdstr:'+this.addForm.value.utdstr);
+
+                    this.modelSaveCB = !this.modelSaveCB;
+
+                    this.lastKey = 0;
+
+                    if (this.addForm.value.utdstr.length > 6) {
                         //UtilLog.log('call searchutdbase:'+this.addForm.value.utdstr);
-                        this.modelutdstr2 = this.addForm.value.utdstr;
+                        if (this.addForm.value.utdstr.endsWith('  ')) {
+                            //alert('ttt1');
+                            let newStr = 'jjj'; // this.addForm.value.utdstr.substring(0,this.addForm.value.utdstr.length-3));
+                            //let newStr =this.addForm.value.utdstr.trim();
+                            UtilLog.log('newStr ['+newStr+']');
+                            // alert('ttt2');
+                            // // alert('pre this.addForm.value.utdstr:'+ this.addForm.value.utdstr);
+                            // // this.addForm.value.utdstr = newStr;
+                            this.modelutdstr2 = newStr;
+                            // // alert('post this.addForm.value.utdstr:'+ this.addForm.value.utdstr);
+                            // // alert('newStr:'+ newStr);
+                        }
                         (<any> window).xxxglobalUtds42List.searchutdbase(this.modelutdstr2);
+
+                        //(<any> window).xxxglobalUtds42List.searchutdbase(this.modelutdstr2);
 
                         //this.modelutdstr2 = "xx:" + UtilDate.getDateStr(new Date()).toString() + " [" + this.addForm.value.utdstr + "]";
                     }
+
+
+
                 }
-
             }
-        }, 500);
+            UtilLog.log('thruxxx');
 
+            // if ((e == 32 && this.lastKey == 32)  ||   (e == 229 && this.lastKey == 229) )
+            // {
+            //     this.modelSaveCB = !this.modelSaveCB;
+            //
+            //     this.lastKey = 0;
+            //
+            //     (<any> window).xxxglobalUtds42List.searchutdbase(this.modelutdstr2);
+            // }
+
+            // //UtilLog.log('-------- start timeout');
+            // setTimeout(() => {
+            //
+            //     let cmpForm = (<any> window).xxxglobalUtds4FormComponent;
+            //     let lastKeyTimeLocal = cmpForm.lastKeyTime;
+            //     if ((new Date()).getTime() - lastKeyTimeLocal > 250 )
+            //     {
+            //         UtilLog.log('-------- in timeout past level 1');
+            //         //if (cmpForm.modelutdstr2 != cmpForm.lastSearchedString)
+            //         {
+            //             UtilLog.log('-------- in timeout past level 2');
+            //             if (this.modelSaveCB && this.addForm.value.utdstr.length > 2) {
+            //                 //UtilLog.log('call searchutdbase:'+this.addForm.value.utdstr);
+            //                 this.modelutdstr2 = this.addForm.value.utdstr;
+            //                 //(<any> window).xxxglobalUtds42List.searchutdbase(this.modelutdstr2);
+            //
+            //                 //this.modelutdstr2 = "xx:" + UtilDate.getDateStr(new Date()).toString() + " [" + this.addForm.value.utdstr + "]";
+            //             }
+            //         }
+            //
+            //     }
+            // }, 500);
+
+        } finally {
+            this.lastKey = e;
+            //lastKeyTime = (new Date()).getTime();
+        }
 
 
 
@@ -412,6 +488,11 @@ export class Utds4FormComponent implements OnInit {
     updatemodelutdstr2() {
         // alert('this.modelutdstr2:'+this.modelutdstr2);
 
+    }
+
+    clearInput() {
+        alert('in clearInput');
+        this.addForm.value.utdstr = "";
     }
 
 }

@@ -69,15 +69,13 @@ export class Utds42List implements OnInit, OnDestroy {
         (<any> window).xxxglobalUtds42List = this;
         //alert ('in Utds42List constructor, this.constructedTime:' + window.xxxglobalUtds42List.constructedTime);
         this.utds4listxxxVariable = "utds4-listxxx";
-    }
-
-
-    changeSortOrder() {
-
+        this.modelTextArea = "Live Log";
     }
 
     increment_counthkhk() {
         this.counthkhk++;
+        //a     lert('in increment_counthkhk:'+this.counthkhk);
+        //UtilLog.log('in increment_counthkhk:'+this.counthkhk);
     }
 
     updateConstrTime(s): void {

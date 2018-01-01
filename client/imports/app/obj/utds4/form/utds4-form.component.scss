@@ -28,15 +28,15 @@
 
       .form-inputs {
         display: table-cell;
-        width: 60%;
+        width: 100%;   // hbk
         vertical-align: top;
-        text-align: center;
+        text-align: left; // hbk
         margin-top: 20px;
       }
 
       .form-extras {
         display: table-cell;
-        width: 40%;
+        width: 100%; // hbk
         vertical-align: top;
 
         .new-utd-map {
@@ -46,7 +46,7 @@
       }
 
       .form-center {
-        width: 50%;
+        width: 100%; // hbk
         text-align: center;
       }
     }

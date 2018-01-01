@@ -1,3 +1,23 @@
+<input
+        width="200"
+        xxclass = "md-block"
+
+        autofocus
+
+        placeholder="Search or Save5"
+
+
+        dividerColor="accent">
+
+</input>
+<input type="text" name="email" size="350"     placeholder="Search or Save6">
+<br>
+
+<!-- hbkhbk -->
+
+
+
+<br>
 
 <div class="form-container">
     <div class="container-background">
@@ -9,18 +29,41 @@
                         <div class="form-inputs">
                             <!--hiMom2!!!!!  \obj\utds4\utds4-form.component.html-->
 
-                            <!-- Main input -->
+                            <!-- INPUT TEXTBOX -->
                             modelutdstr2:{{modelutdstr2}}
                             <button color="white" md-button (click)="updatemodelutdstr2()">updatemodelutdstr2()</button>
-                            <md-input #utdstrhtmlholder formControlName="utdstr"
-                                      autofocus
-                                      (ngModelChange)="changePropagate_modelSaveCB2($event)"
-                                      placeholder="Search orß Save"
-                                      [ngModel]="modelutdstr2"
-                                         (keyup) ="eventKeyHandlerUtdForm($event.keyCode, addForm.value)" dividerColor="accent" ></md-input>
+                            <br>
+
+
+                            <!--xxwidth="300px"-->
+                            <!--xxclass = "hbk_md-block"-->
+                            <!--xxsize="100"-->
+                            <md-input
+
+                                #utdstrhtmlholder formControlName="utdstr"
+
+                                (ngModelChange)="changePropagate_modelSaveCB2($event)"
+                                placeholder="Search or Save"
+                                [ngModel]="modelutdstr2"
+                                (keyup) ="eventKeyHandlerUtdForm($event.keyCode, addForm.value)"
+                                dividerColor="accent">
+                            </md-input>
+
+                            <!--autosize-->
+                            <!--autofocus-->
+
+                            <!--<md-input-container>-->
+                                <!--<label>Color</label>-->
+                                <!--<input type="text" md-maxlength="10">-->
+                            <!--</md-input-container>-->
+
+
+                            <br>
 
                             <!-- SEARCH/ADD button -->
+                            <button color="blue" md-button (click)="clearInput()">Clear</button>
                             <button color="accent" md-raised-button type="submit">{{modelSaveVsAddButtonLabel}}</button>
+
 
 
                             <!-- current search string -->
@@ -39,12 +82,12 @@
                 <a xxxclass="clear" href="" (click)="clearSearch()">Xxx</a>
 
                 <!--<form *ngIf="user" [formGroup]="setSearchStringForm" (ngSubmit)="setAddField(htmlholderSetSrch.value)">-->
-                    <!--<div style="display: table-row">-->
-                        <!--<div class="form-inputs">-->
-                            <!--<button color="accent" md-raised-button type="submit">setSrch!</button>-->
-                            <!--<md-input dividerColor="accent" #htmlholderSetSrch formControlName="setsrchhbk" placeholder="setSrch"></md-input>-->
-                        <!--</div>-->
-                    <!--</div>-->
+                <!--<div style="display: table-row">-->
+                <!--<div class="form-inputs">-->
+                <!--<button color="accent" md-raised-button type="submit">setSrch!</button>-->
+                <!--<md-input dividerColor="accent" #htmlholderSetSrch formControlName="setsrchhbk" placeholder="setSrch"></md-input>-->
+                <!--</div>-->
+                <!--</div>-->
                 <!--</form>-->
 
 
