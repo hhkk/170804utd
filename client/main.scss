@@ -2,8 +2,8 @@
 @import "imports/app/mobile/ionic.scss";
 
 @include md-core();
-$app-primary: md-palette($md-light-blue, 500, 100, 700);
-$app-accent:  md-palette($md-pink, A200, A100, A400);
+$app-primary: md-palette($md-light-blue, 100, 200, 200);
+$app-accent:  md-palette($md-green, A700, A500, A100);
 $app-warn:    md-palette($md-red);
 $app-theme: md-light-theme($app-primary, $app-accent, $app-warn);
 @include angular-material-theme($app-theme);
@@ -29,8 +29,8 @@ body.web {
 }
 
 .sebm-google-map-container {
-  width: 450px;
-  height: 450px;
+  width: 100px;
+  height: 100px;
 }
 
 .md-whiteframe-z2 {
