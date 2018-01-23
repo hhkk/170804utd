@@ -10,7 +10,7 @@ import { AppComponent } from "./app.component.web";
 import { routes, ROUTES_PROVIDERS } from './app.routes';
 import { PARTIES_DECLARATIONS } from './parties';
 import { SHARED_DECLARATIONS } from './shared';
-import { MaterialModule } from "@angular/material";
+import { MaterialModule } from "@angular/material"; // hbkhbk
 import { AUTH_DECLARATIONS } from "./auth/index";
 import { FileDropModule } from "angular2-file-drop";
 import { MOBILE_DECLARATIONS } from "./mobile/index";
@@ -21,7 +21,9 @@ import { UtdsListMobileComponent } from "./mobile/utds-list.component.mobile";
 
 let moduleDefinition;
 
+console.log ('before iscordova');
 if (Meteor.isCordova) {
+    console.log ('yes iscordova');
   moduleDefinition = {
     imports: [
       Ng2PaginationModule,
@@ -43,7 +45,9 @@ if (Meteor.isCordova) {
   }
 }
 else {
-  moduleDefinition = {
+    console.log ('not iscordova');
+
+    moduleDefinition = {
     imports: [
       BrowserModule,
       FormsModule,
