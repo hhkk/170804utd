@@ -6,14 +6,15 @@
   flex-grow: 1;
   z-index: 1;
   width: 100%;
-  color: purple;
+  color: green;
 
   .container-background {
     background: linear-gradient(rgb(0,121,107),rgb(0,150,136));
-    color: #ccc;
+    color: #aaaaaa;
 
+    //backgound here is the color around the md input
     .form-content {
-      background: #0277bd;
+      background: #b0ffa9;
       width: 100%;
       padding: 0 !important;
       align-items: center;
