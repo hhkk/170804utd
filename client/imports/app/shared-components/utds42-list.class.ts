@@ -102,6 +102,18 @@ export class Utds42List implements OnInit, OnDestroy {
         // no work? document.getElementById('keyupAndModel').innerHTML = 'sssssssssss' + element;
         // no more?        let target = angular.element('#keyupAndModel');
     }
+    setbold(): void {
+        ////alert('in updateConstrTime() s:' + s);
+        //console.log(document.queryCommandSupported('copy'));
+        document.execCommand("bold");
+
+    }
+    setunderline(): void {
+        ////alert('in updateConstrTime() s:' + s);
+        console.log('underline:' + document.queryCommandSupported('underline'));
+        document.execCommand("underline");
+
+    }
 
 
     updateConstrTimeBlur(s): void {

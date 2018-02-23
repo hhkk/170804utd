@@ -33,3 +33,4 @@ mobile-status-bar@1.0.14
 dynamic-import
 ecmascript
 http
+keypress:keypress

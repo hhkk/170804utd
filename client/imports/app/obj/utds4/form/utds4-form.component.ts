@@ -56,8 +56,29 @@ export class Utds4FormComponent implements OnInit {
         this.lastKeyTime = (new Date()).getTime();
         this.kbqueue = [];
 
+        var listener = new window.keypress.Listener();
+        listener.simple_combo("shift s", function() {
+            console.log("You pressed shift and s2");
+            document.execCommand("underline");
+
+        });
+
+// There are also a few other shortcut methods:
+
+// If we want to register a counting combo
+        listener.counting_combo("tab space", function(e, count) {
+            console.log("You've pressed this " + count + " times.");
+        });
+
+// If you want to register a sequence combo
+        listener.sequence_combo("up up down down left right left right b a enter", function() {
+           // lives = 30;
+        }, true);
+
         //this.modelSaveVsAddButtonLabel = "Savexx";
     }
+
+
 
     clearSearch() {
         alert ('in clearSearch  ');
@@ -76,9 +97,17 @@ export class Utds4FormComponent implements OnInit {
         //console.log ('in 4 changePropagate_modelSaveCB event DONE:' + event);
     }
 
+    // happens every keystroke
     changePropagate_modelSaveCB2 (event) {
 
-        // alert ('in 1 changePropagate_modelSaveCB2 event TOP:' + event);
+        //alert ('in 1 changePropagate_modelSaveCB2 event TOP:' + event);
+    }
+
+
+    // happens every keystroke
+    changePropagate_modelSaveCB3 () {
+
+        //alert ('in 1 changePropagate_modelSaveCB2 event TOP:3' );
     }
 
 
@@ -92,6 +121,19 @@ export class Utds4FormComponent implements OnInit {
                 save2: [true],
                 dynamic: [true]
             });
+
+
+        var editable = document.getElementById('texthbk');
+        editable.addEventListener('input', function() {
+            console.log('Hey, somebody changed something in my text!');
+            document.getElementById('texthbk') .style.color = "red";
+            document.getElementById('texthbk') .style.color = "red"
+            document.getElementById('texthbk') .innerHTML = "red"
+            document.getElementById('texthbk') .innerHTML = "red"
+            console.log('Hey, somebody changed something in my text!');
+
+
+        });
 
 
         // let xx = window.xxxglobalUtds4FormComponent.addForm.getRawValue();

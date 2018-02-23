@@ -61,22 +61,40 @@
         <!--background-color:darkmagenta;-->
         <!--font-size:10px;"-->
 
+        <!--<div id="textArea" class="editable" data-type="textarea" data-placeholder="Enter text" data-emptytext="Click to enter text" data-rows="4">{{textAreaContent}}</div>-->
+
+
         <div class="form-content">
             <div class="form-center">
                 <form *ngIf="user" [formGroup]="addForm" (ngSubmit)="addUtd(utdstrhtmlholder.value, saveHtmlHolder);">
-                    <div contenteditable="true" >
-                        test text1
-                    </div>
+                    <!--<div contenteditable="true" >-->
+                        <!--test text1-->
+                    <!--</div>-->
                     <div style="display: table-row">
-                        <div contenteditable="true" class="form-inputs"
+                        <div class="form-inputs"
                              style="font-size:24px;"
                             >
                             <!--hiMom2!!!!!  \obj\utds4\utds4-form.component.html-->
-
+111
                             <!-- INPUT TEXTBOX -->
+                            <!--<trix-editor></trix-editor>-->
+                                    <input type="text" name="txt" value="Hello" onchange="changePropagate_modelSaveCB3()">
+ 2222                           <br>
 
-                            <br>
+ 3333                           <br>
+                            <div onchange="changePropagate_modelSaveCB3()"
+                                    style="background-color:white;" contenteditable="true" id="textArea" class="editable" data-type="textarea"
+                                 data-placeholder="Enter text" data-emptytext="Click to enter text" data-rows="4">
+                                <br onchange="changePropagate_modelSaveCB3()">
+                                "Enter"
+                                <br>
+                                "Search"
+                                <br>
+4444
 
+
+
+                            </div>
 
                             <!--xxwidth="300px"-->
                             <!--xxclass = "hbk_md-block"-->
@@ -87,6 +105,9 @@
                             <!--foreground-color:pink;-->
                             <!--background-color:darkmagenta;-->
                             <!--font-size:10px;"-->
+
+
+
                             <input
                             style="
                             foreground-color:purple;
@@ -99,6 +120,8 @@
                                 (keyup) ="eventKeyHandlerUtdForm($event.keyCode, addForm.value)"
                                 dividerColor="accent">
                             </input>
+
+
                             fixed4.1 [{{lastSearchedString}}]  fixed4.2 [{{modelutdstr2}}]
                             <br>
                             <button color="red" md-button (click)="updatemodelutdstr2()">buttonFixedUpdatemodelutdstr2()</button>
@@ -154,6 +177,10 @@
                 </div>
 
             </div>
+            <div id="texthbk" style="font-size:24px;" contenteditable>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at arcu ac dui eleifend suscipit a ut est. Ut iaculis ut massa non accumsan. Quisque hendrerit nisl at egestas cursus.
+            </div>
+
             <div contenteditable="true" >
                 test text3
             </div>
