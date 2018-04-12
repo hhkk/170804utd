@@ -107,7 +107,7 @@ export class Utds4FormComponent implements OnInit {
     // happens every keystroke
     changePropagate_modelSaveCB3 () {
 
-        //alert ('in 1 changePropagate_modelSaveCB2 event TOP:3' );
+        alert ('in 1 changePropagate_modelSaveCB3 event TOP:3' );
     }
 
 
